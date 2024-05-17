@@ -1,0 +1,46 @@
+.container {
+  position: relative;
+}
+.wrapper {
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--color-text-light);
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.label {
+}
+.menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: var(--color-base);
+  padding: 10px;
+  box-shadow:
+    rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  list-style: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+.menu li {
+  padding: 10px 0;
+  text-align: center;
+  font-size: var(--fz-sm);
+  cursor: pointer;
+}
+
+.menu li:hover {
+  background-color: var(--color-gray-light);
+  width: 100%;
+  text-align: center;
+}
+
+.menu.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
