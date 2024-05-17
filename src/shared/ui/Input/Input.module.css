@@ -1,0 +1,52 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+.wrapper:focus {
+  border: 1px solid var(--color-primary);
+}
+.lg {
+  padding: 10px 0;
+}
+.md {
+  padding: 6px 0;
+}
+.wrapper input {
+  width: 100%;
+  color: var(--main-white);
+  border-radius: 10px;
+  border: 1px solid var(--color-text-light);
+  background-color: var(--color-base);
+  padding-left: 20px;
+  font-size: 20px;
+  transition: 0.1s var(--input-ease);
+  outline: none;
+  box-sizing: border-box;
+}
+.wrapper input:focus {
+  border: 2px solid var(--color-primary);
+}
+.wrapper label {
+  position: absolute;
+  top: 50%;
+  left: 2%;
+  transform: translateY(-50%);
+  color: var(--color-primary);
+  background-color: var(--color-base);
+  text-align: center;
+  transition: 0.2s var(--input-ease);
+  font-size: var(--fz-sm);
+  pointer-events: none;
+  padding: 0 5px;
+}
+
+.wrapper input:not(:placeholder-shown) ~ label,
+.wrapper input:focus ~ label {
+  top: 0px;
+  left: 10px;
+  font-size: var(--fz-sm);
+}
+
+.input:focus ~ label {
+  color: var(--color-primary) !important;
+}
