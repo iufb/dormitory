@@ -24,22 +24,20 @@ export function Select<T>({
         </span>
         {opened ? <GoTriangleUp /> : <GoTriangleDown />}
       </div>
-      {opened && (
-        <ul className={clsx(styles.menu, opened && styles.visible)}>
-          {items.map((item, idx) => (
-            <li
-              onClick={() => {
-                setOpened(false);
-                setSelected(item);
-                onSelect(item);
-              }}
-              key={idx}
-            >
-              {getValueString(item)}
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul className={clsx(styles.menu, opened ? styles.opened : styles.closed)}>
+        {items.map((item, idx) => (
+          <li
+            onClick={() => {
+              setOpened(false);
+              setSelected(item);
+              onSelect(item);
+            }}
+            key={idx}
+          >
+            {getValueString(item)}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
