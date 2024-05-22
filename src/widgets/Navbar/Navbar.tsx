@@ -33,13 +33,7 @@ export const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const resize = () => {
-      setIsMobile((prev) => {
-        if (!prev && window.innerWidth > 500) {
-          return false;
-        } else {
-          return true;
-        }
-      });
+      setIsMobile(window.innerWidth <= 500);
     };
     window.addEventListener("resize", resize);
     return () => window.removeEventListener("resize", resize);

@@ -4,6 +4,7 @@ import "@/shared/styles/globals.css";
 import "@/shared/styles/reset.css";
 import "@/shared/styles/vars.css";
 import { Navbar } from "@/widgets";
+import { Layout } from "@/shared/ui";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <Layout navbar={<Navbar />}>{children}</Layout>
       </body>
     </html>
   );
