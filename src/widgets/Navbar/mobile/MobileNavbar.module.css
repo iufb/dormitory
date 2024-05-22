@@ -16,13 +16,15 @@
   max-height: 65px;
 }
 .burger {
-  animation: fadein 2s ease-in-out;
+  animation: fadein 0.5s ease-in-out;
+  cursor: pointer;
 }
 .close {
   animation: fadein 0.5s ease-in-out;
   position: absolute;
   right: 20px;
   top: 20px;
+  cursor: pointer;
 }
 .linkList {
   animation: fadein 0.5s ease-in-out;
@@ -41,8 +43,8 @@
   gap: 10px;
   text-decoration: none;
   &:hover {
-    color: var(--color-text-light);
-    fill: var(--color-text-light);
+    color: var(--color-text-hover);
+    fill: var(--color-text-hover);
   }
 }
 .linkIcon {

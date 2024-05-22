@@ -1,22 +1,33 @@
 "use client";
+import { FaHome, FaBook, FaRegListAlt } from "react-icons/fa";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import { DesktopNavbar } from "./desktop/DesktopNavbar";
 import { MobileNavbar } from "./mobile/MobileNavbar";
 import { useEffect, useState } from "react";
+import { IconBaseProps, IconType } from "react-icons";
 
 type Link = {
-  icon: string;
+  icon: (props: IconBaseProps) => JSX.Element;
   label: string;
   path: string;
 };
 export const links: Link[] = [
-  { icon: "/icons/home.svg", label: "Главная", path: "/" },
-  { icon: "/icons/rules.svg", label: "Положение", path: "/rules" },
+  { icon: (props) => <FaHome {...props} />, label: "Главная", path: "/" },
   {
-    icon: "/icons/submitting.svg",
+    icon: (props) => <FaBook {...props} />,
+    label: "Положение",
+    path: "/rules",
+  },
+  {
+    icon: (props) => <FaRegListAlt {...props} />,
     label: "Подача заявления",
     path: "/submitting",
   },
-  { icon: "/icons/status.svg", label: "Статус заявления", path: "/status" },
+  {
+    icon: (props) => <FaMagnifyingGlass {...props} />,
+    label: "Статус заявления",
+    path: "/status",
+  },
 ];
 export const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);

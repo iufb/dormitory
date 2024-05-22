@@ -38,7 +38,7 @@
 }
 
 .linkIcon {
-  color: var(--color-base);
+  fill: var(--color-base);
 }
 .label {
   animation: fadein 0.5s ease-in-out;

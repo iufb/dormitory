@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import clsx from "clsx";
 import { links } from "../Navbar";
+import { IoClose } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export const MobileNavbar = () => {
   const [expanded, setExpanded] = useState(false);
@@ -16,35 +18,32 @@ export const MobileNavbar = () => {
       className={clsx(styles.nav, expanded ? styles.expanded : styles.normal)}
     >
       {expanded ? (
-        <Image
+        <IoClose
+          aria-label="close menu"
+          size={30}
+          color="white"
           onClick={() => setExpanded(false)}
-          src={"/icons/close.svg"}
-          alt="close menu"
           className={styles.close}
-          width={30}
-          height={30}
         />
       ) : (
-        <Image
-          onClick={() => setExpanded(true)}
-          src={"/icons/burger.svg"}
-          alt="close menu"
-          width={40}
-          height={40}
+        <RxHamburgerMenu
           className={styles.burger}
+          aria-label="burger"
+          size={40}
+          color="white"
+          onClick={() => setExpanded(true)}
         />
       )}
       {expanded && (
         <ul className={styles.linkList}>
           {links.map(({ icon, label, path }) => (
-            <Link href={path} key={label} className={styles.link}>
-              <Image
-                className={styles.linkIcon}
-                src={icon}
-                alt={label}
-                width={30}
-                height={30}
-              />
+            <Link
+              href={path}
+              key={label}
+              className={styles.link}
+              onClick={() => setExpanded(false)}
+            >
+              {icon({ size: 40 })}
               <span className={styles.label}> {label}</span>
             </Link>
           ))}

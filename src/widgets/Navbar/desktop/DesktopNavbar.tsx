@@ -10,7 +10,7 @@ export const DesktopNavbar = () => {
   const [expanded, setExpanded] = useState(false);
 
   const mouseActionDelay = (func: () => void) => {
-    setTimeout(func, 400);
+    setTimeout(func, 200);
   };
   return (
     <nav
@@ -21,13 +21,7 @@ export const DesktopNavbar = () => {
       <ul className={styles.linkList}>
         {links.map(({ icon, label, path }) => (
           <Link href={path} key={label} className={styles.link}>
-            <Image
-              className={styles.linkIcon}
-              src={icon}
-              alt={label}
-              width={45}
-              height={45}
-            />
+            {icon({ size: 45 })}
             {expanded && <span className={styles.label}> {label}</span>}
           </Link>
         ))}
