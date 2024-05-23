@@ -1,3 +1,11 @@
+import { CheckApplicationForm } from "@/features";
+import { BgWrapper, PageTransition } from "@/shared/ui";
+
 export default function Status() {
-  return <div>status</div>;
+  return (
+    <PageTransition>
+      <BgWrapper />
+      <CheckApplicationForm />
+    </PageTransition>
+  );
 }

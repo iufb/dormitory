@@ -1,0 +1,15 @@
+.fadeIn {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.75s ease-in-out forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
