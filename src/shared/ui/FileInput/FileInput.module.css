@@ -1,5 +1,8 @@
+.container {
+}
 .label {
   font-size: var(--fz-sm);
+  cursor: pointer;
 }
 .wrapper {
   margin-top: 10px;
@@ -10,10 +13,10 @@
 }
 .wrapper input {
   position: absolute;
+  z-index: -1;
   opacity: 0;
 }
 .content {
-  cursor: pointer;
   display: block;
   width: 100%;
   padding: 6px 0;
@@ -23,4 +26,6 @@
   border-radius: 10px;
   background-color: var(--color-primary);
   color: var(--color-base);
+
+  cursor: pointer;
 }

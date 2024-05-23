@@ -10,7 +10,7 @@ export const FileInput = ({
   ...inputProps
 }: FileInputProps) => {
   return (
-    <div>
+    <div className={styles.container}>
       <label className={styles.label} htmlFor={label}>
         {label}
       </label>

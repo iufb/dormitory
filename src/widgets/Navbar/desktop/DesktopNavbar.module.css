@@ -31,7 +31,9 @@
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  transition: filter 0.3s ease-in-out;
+  transition:
+    color 0.3s ease-in-out,
+    fill 0.3s ease-in-out;
   &:hover {
     color: var(--color-text-hover);
     fill: var(--color-text-hover);
