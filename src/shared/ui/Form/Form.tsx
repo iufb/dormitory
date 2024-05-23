@@ -1,11 +1,12 @@
 import { ComponentProps, ReactNode } from "react";
 import styles from "./Form.module.css";
+import clsx from "clsx";
 interface FormProps extends ComponentProps<"form"> {
   children: ReactNode;
 }
-export const Form = ({ children, ...props }: FormProps) => {
+export const Form = ({ children, className, ...props }: FormProps) => {
   return (
-    <form className={styles.form} {...props}>
+    <form className={clsx(styles.form, className)} {...props}>
       {children}
     </form>
   );

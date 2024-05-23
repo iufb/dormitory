@@ -23,8 +23,9 @@
   transition: 0.1s var(--input-ease);
   outline: none;
   box-sizing: border-box;
+  outline: none;
   &:focus {
-    border: 2px solid var(--color-primary);
+    outline: 1px solid var(--color-primary);
   }
   &:not(:placeholder-shown) ~ label,
   &:focus ~ label {

@@ -10,7 +10,7 @@ export const FileInput = ({
   ...inputProps
 }: FileInputProps) => {
   return (
-    <>
+    <div>
       <label className={styles.label} htmlFor={label}>
         {label}
       </label>
@@ -20,6 +20,6 @@ export const FileInput = ({
           {content}
         </label>
       </div>
-    </>
+    </div>
   );
 };
