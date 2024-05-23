@@ -1,15 +1,16 @@
 import Link from "next/link";
 import styles from "./MobileNavbar.module.css";
 import Image from "next/image";
+import { Menu } from "../menu/Menu";
 import { useState } from "react";
 import clsx from "clsx";
 import { links } from "../Navbar";
 import { IoClose } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { headers } from "next/headers";
 
 export const MobileNavbar = () => {
   const [expanded, setExpanded] = useState(false);
-
   const mouseActionDelay = (func: () => void) => {
     setTimeout(func, 400);
   };
@@ -34,21 +35,7 @@ export const MobileNavbar = () => {
           onClick={() => setExpanded(true)}
         />
       )}
-      {expanded && (
-        <ul className={styles.linkList}>
-          {links.map(({ icon, label, path }) => (
-            <Link
-              href={path}
-              key={label}
-              className={styles.link}
-              onClick={() => setExpanded(false)}
-            >
-              {icon({ size: 40 })}
-              <span className={styles.label}> {label}</span>
-            </Link>
-          ))}
-        </ul>
-      )}
+      {expanded && <Menu isMobile />}
     </nav>
   );
 };

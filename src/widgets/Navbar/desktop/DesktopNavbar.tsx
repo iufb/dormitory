@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import clsx from "clsx";
 import { links } from "../Navbar";
+import { Menu } from "../menu/Menu";
 
 export const DesktopNavbar = () => {
   const [expanded, setExpanded] = useState(false);
@@ -18,14 +19,7 @@ export const DesktopNavbar = () => {
       onMouseEnter={() => mouseActionDelay(() => setExpanded(true))}
       onMouseLeave={() => mouseActionDelay(() => setExpanded(false))}
     >
-      <ul className={styles.linkList}>
-        {links.map(({ icon, label, path }) => (
-          <Link href={path} key={label} className={styles.link}>
-            {icon({ size: 45 })}
-            {expanded && <span className={styles.label}> {label}</span>}
-          </Link>
-        ))}
-      </ul>
+      <Menu isMobile={false} expanded={expanded} />
     </nav>
   );
 };
