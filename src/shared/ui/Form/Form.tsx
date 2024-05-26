@@ -6,7 +6,7 @@ interface FormProps extends ComponentProps<"form"> {
 }
 export const Form = ({ children, className, ...props }: FormProps) => {
   return (
-    <form className={clsx(styles.form, className)} {...props}>
+    <form className={clsx(className, styles.form)} {...props}>
       {children}
     </form>
   );

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import styles from "./Typography.module.css";
-type TypographyVariant = "title" | "subtitle";
+type TypographyVariant = "title" | "subtitle" | "whiteSubtitle";
 type TypographyTag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p";
 export type TypographyProps<Tag extends TypographyTag> =
   React.ComponentProps<Tag> & {
@@ -21,7 +21,11 @@ export const Typography = <Tag extends TypographyTag = "div">({
   return (
     <Component
       className={clsx(
-        { title: styles.title, subtitle: styles.subtitle }[variant],
+        {
+          title: styles.title,
+          subtitle: styles.subtitle,
+          whiteSubtitle: styles.whiteSubtitle,
+        }[variant],
         className,
       )}
       {...props}
