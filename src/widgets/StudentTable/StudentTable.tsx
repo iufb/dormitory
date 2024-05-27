@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import styles from "./StudentTable.module.css";
 const columns = [
   { Header: "№", accessor: "id" },
@@ -5,22 +6,31 @@ const columns = [
   { Header: "Дата", accessor: "date" },
   { Header: "Просмотр", accessor: "show" },
 ];
-const data = [{ id: 1, name: "John Doe", date: 28, show: "john@example.com" }];
+const data = [
+  { id: 1, name: "John Doe", date: 28, show: "john@example.com" },
+  { id: 2, name: "John Doe", date: 28, show: "john@example.com" },
+  { id: 2, name: "John Doe", date: 28, show: "john@example.com" },
+];
 export const StudentTable = () => {
   return (
     <table className={styles.table}>
-      <thead>
+      <thead className={styles.head}>
         <tr>
           {columns.map((column) => (
-            <th key={column.accessor}>{column.Header}</th>
+            <th className={styles.th} key={column.accessor}>
+              {column.Header}
+            </th>
           ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody className={styles.body}>
         {data.map((row, rowIndex) => (
-          <tr key={rowIndex}>
+          <tr
+            key={rowIndex}
+            className={clsx(rowIndex % 2 == 0 ? styles.gray : styles.white)}
+          >
             {columns.map((column) => (
-              <td key={column.accessor}>
+              <td className={styles.cell} key={column.accessor}>
                 {row[column.accessor as keyof typeof row]}
               </td>
             ))}

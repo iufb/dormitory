@@ -1,4 +1,28 @@
 .table {
   max-width: 1200px;
   width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+.head {
+  background-color: var(--color-primary);
+  color: var(--color-base);
+}
+.th {
+  padding: 10px;
+}
+.body {
+  width: 100%;
+}
+
+.cell {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.gray {
+  background-color: #d8d8d8;
+}
+.white {
+  background-color: #f9f9f9;
 }
