@@ -1,8 +1,9 @@
 "use client";
 import clsx from "clsx";
 import styles from "./Select.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
+import { useOnClickOutside } from "@/shared/hooks";
 interface SelectProps<T> {
   label: string;
   items: T[];
@@ -17,8 +18,10 @@ export function Select<T>({
 }: SelectProps<T>) {
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState<T | null>(null);
+  const ref = useRef(null);
+  useOnClickOutside(ref, () => setOpened(false));
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={ref}>
       <div className={styles.wrapper} onClick={() => setOpened(!opened)}>
         <span className={styles.label}>
           {selected ? getValueString(selected) : label}
