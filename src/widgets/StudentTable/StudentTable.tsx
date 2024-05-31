@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import styles from "./StudentTable.module.css";
+import { OpenDetailsButton } from "@/features";
 const columns = [
   { Header: "№", accessor: "id" },
   { Header: "ФИО", accessor: "name" },
@@ -9,7 +10,7 @@ const columns = [
 const data = [
   { id: 1, name: "John Doe", date: 28, show: "john@example.com" },
   { id: 2, name: "John Doe", date: 28, show: "john@example.com" },
-  { id: 2, name: "John Doe", date: 28, show: "john@example.com" },
+  { id: 3, name: "John Doe", date: 28, show: "john@example.com" },
 ];
 export const StudentTable = () => {
   return (
@@ -29,11 +30,17 @@ export const StudentTable = () => {
             key={rowIndex}
             className={clsx(rowIndex % 2 == 0 ? styles.gray : styles.white)}
           >
-            {columns.map((column) => (
-              <td className={styles.cell} key={column.accessor}>
-                {row[column.accessor as keyof typeof row]}
-              </td>
-            ))}
+            {columns.map((column, idx) => {
+              return (
+                <td className={styles.cell} key={column.accessor}>
+                  {idx == 3 ? (
+                    <OpenDetailsButton id={row.id} />
+                  ) : (
+                    row[column.accessor as keyof typeof row]
+                  )}
+                </td>
+              );
+            })}
           </tr>
         ))}
       </tbody>
