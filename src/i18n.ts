@@ -1,20 +1,14 @@
-import { NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
 import { getRequestConfig } from "next-intl/server";
-import { cookies } from "next/headers";
 
-const locales = { kz: "kz", ru: "ru" };
-export default getRequestConfig(async () => {
-  // Provide a static locale, fetch a user setting,
-  // read from `cookies()`, `headers()`, etc.
-  //
-  const cookie = cookies().get("locale");
-  let locale = locales.ru;
-  if (cookie) {
-    locale = cookie.value;
-  }
+// Can be imported from a shared config
+const locales = ["ru", "kz"];
+
+export default getRequestConfig(async ({ locale }) => {
+  // Validate that the incoming `locale` parameter is valid
+  if (!locales.includes(locale as any)) notFound();
 
   return {
-    locale,
     messages: (await import(`../messages/${locale}.json`)).default,
   };
 });

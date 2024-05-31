@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconBaseProps } from "react-icons";
-import { FaBook, FaHome, FaRegListAlt } from "react-icons/fa";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 import styles from "./Menu.module.css";
+import { IconBaseProps } from "react-icons";
+import { FaHome, FaBook, FaRegListAlt } from "react-icons/fa";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 interface MenuProps {
   isMobile: boolean;
   expanded?: boolean;
@@ -42,7 +42,7 @@ export const Menu = ({ expanded, onPress, isMobile }: MenuProps) => {
         return (
           <Link
             onClick={onPress}
-            href={path}
+            href={"/" + pathname.split("/")[1] + path}
             key={label}
             className={clsx(styles.link, pathname === path && styles.active)}
           >
