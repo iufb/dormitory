@@ -35,16 +35,24 @@ export const links: Link[] = [
 ];
 export const Menu = ({ expanded, onPress, isMobile }: MenuProps) => {
   const pathname = usePathname();
+  const locale = pathname.split("/")[1];
 
   return (
     <ul className={styles.linkList}>
       {links.map(({ icon, label, path }) => {
+        const isActive = () => {
+          if (path === "/") {
+            return pathname === `/${locale}`;
+          }
+          return pathname === `/${locale}${path}`;
+        };
+
         return (
           <Link
             onClick={onPress}
-            href={"/" + pathname.split("/")[1] + path}
+            href={"/" + locale + path}
             key={label}
-            className={clsx(styles.link, pathname === path && styles.active)}
+            className={clsx(styles.link, isActive() && styles.active)}
           >
             {icon({ size: isMobile ? 40 : 45 })}
             {isMobile ? (
