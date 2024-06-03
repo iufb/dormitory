@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/widgets";
 import { Layout } from "@/shared/ui";
+import { LocaleChanger } from "@/features";
 
 export const metadata: Metadata = {
   title: "Главная",
@@ -13,5 +14,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <Layout navbar={<Navbar />}>{children}</Layout>;
+  return (
+    <Layout navbar={<Navbar />} localeChanger={<LocaleChanger />}>
+      {children}
+    </Layout>
+  );
 }

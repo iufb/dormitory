@@ -1,10 +1,16 @@
 .wrapper {
-  width: 50px;
-  height: 10px;
-  background-color: red;
-  color: white;
-  position: fixed;
+  position: absolute;
   right: 10%;
-  top: 30%;
+  top: 10%;
   z-index: 300;
+}
+.select {
+  background: inherit;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 24px;
+}
+.select option {
+  color: black;
 }
