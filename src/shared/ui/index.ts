@@ -1,4 +1,5 @@
 export { BgWrapper } from "./BgWrapper/BgWrapper";
+export { Error } from "./Error/Error";
 export { Button } from "./Button/Button";
 export { FileInput } from "./FileInput/FileInput";
 export { Form } from "./Form/Form";

@@ -9,8 +9,8 @@ export default function AdminPanelPage({
 }: {
   params: { locale: string };
 }) {
-  const user = cookies().get("user");
-  if (!user) redirect(`/${params.locale}/admin/login`);
+  const token = cookies().get("token");
+  if (!token) redirect(`/${params.locale}/admin/login`);
 
   return (
     <section className={styles.wrapper}>
