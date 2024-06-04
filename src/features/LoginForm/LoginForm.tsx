@@ -18,6 +18,8 @@ export const LoginForm = () => {
     setError("");
     setLoading(true);
     e.preventDefault();
+    console.log(username, password);
+
     LoginUser({ username, password })
       .then((data) => {
         setCookie("token", data.token);

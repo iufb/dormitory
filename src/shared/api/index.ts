@@ -1,4 +1,52 @@
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const paths = {
+  decan: "decan_view/",
+  commandant: "commandant_view/",
+  specialist: "specialist_view/",
+};
+export interface Application {
+  name: string;
+  so_name: string;
+  id_card: string;
+  iin_id: number;
+  tel: string;
+  facultet: string;
+  obshezhitie: string;
+  status: string;
+}
+export const getApplicationsByRole = (
+  role: string,
+  token: string,
+): Promise<Application[]> => {
+  const path = paths[role as keyof typeof paths];
+
+  return customFetch({
+    method: "GET",
+    path,
+    token: `Token ${token}`,
+  });
+};
+interface LoginUserRequest {
+  username: string;
+  password: string;
+}
+export const LoginUser = (data: LoginUserRequest) => {
+  return customFetch({
+    method: "POST",
+    path: "api-token-auth/",
+    body: { json: data },
+  });
+};
+export const GetRole = (token: string) => {
+  return customFetch({ method: "GET", path: "profile/", token });
+};
+export const CreateApplication = (data: FormData) => {
+  return customFetch({
+    method: "POST",
+    path: "upload-file/",
+    body: { multipart: data },
+  });
+};
 interface Request {
   path: string;
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
@@ -21,7 +69,7 @@ const customFetch = async (params: Request) => {
   }
   const headers = new Headers();
   if (params.body?.json) {
-    headers.set("content-type", "application/json");
+    headers.set("Content-Type", "application/json");
   }
   if (params.token) {
     headers.set("authorization", params.token);
@@ -49,24 +97,4 @@ const customFetch = async (params: Request) => {
   // if (response.status === 401) {
   //   throw { message: 'unauthorized' }
   // }
-};
-interface LoginUserRequest {
-  username: string;
-  password: string;
-}
-export const LoginUser = (data: LoginUserRequest) => {
-  return customFetch({
-    method: "POST",
-    path: "api-token-auth/",
-    body: { json: data },
-  });
-};
-export const GetRole = (token: string) => {
-  return customFetch({ method: "GET", path: "profile/", token });
-};
-export const CreateApplication = (data: FormData) => {
-  return fetch(`${backendUrl}/api/upload-file`, {
-    method: "POST",
-    body: data,
-  });
 };
