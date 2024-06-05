@@ -20,6 +20,20 @@ export interface Application {
   k_one: string;
   k_two: string;
 }
+export const updateApplicationStatus = (
+  id: number,
+  status: string,
+  role: string,
+) => {
+  const data = new FormData();
+  data.append("status", status);
+  return customFetch({
+    method: "PATCH",
+    path: `${paths[role as keyof typeof paths]}${id}/`,
+    token: `Token ${getCookie("token")}`,
+    body: { multipart: data },
+  });
+};
 export const getApplicationsByRole = (
   role: string,
   token: string,

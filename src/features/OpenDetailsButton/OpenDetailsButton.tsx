@@ -10,7 +10,8 @@ import styles from "./OpenDetailsButton.module.css";
 import { Application } from "@/shared/api";
 import { cookies } from "next/headers";
 import { getCookie } from "cookies-next";
-import { DecanForm, KomendantForm } from "@/features";
+import { ChangeStatusButton, DecanForm, KomendantForm } from "@/features";
+import { appendFile } from "fs";
 interface OpenDetailsButtonProps {
   application: Application;
 }
@@ -120,6 +121,7 @@ const ContentLeft = ({
           </a>
         </>
       )}
+      {role !== "decan" && <ChangeStatusButton id={application.iin_id} />}
     </div>
   );
 };
