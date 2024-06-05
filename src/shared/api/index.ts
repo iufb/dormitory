@@ -13,6 +13,10 @@ export interface Application {
   facultet: string;
   obshezhitie: string;
   status: string;
+  direction: string;
+  certificate: string;
+  k_one: string;
+  k_two: string;
 }
 export const getApplicationsByRole = (
   role: string,

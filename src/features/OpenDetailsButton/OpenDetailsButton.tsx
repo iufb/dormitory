@@ -1,31 +1,42 @@
 "use client";
 import { useOnClickOutside } from "@/shared/hooks";
-import { Button, Modal } from "@/shared/ui";
+import { Button, Modal, Typography } from "@/shared/ui";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { FaEye } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import styles from "./OpenDetailsButton.module.css";
+import { Application } from "@/shared/api";
+import { cookies } from "next/headers";
+import { getCookie } from "cookies-next";
+import { DecanForm, KomendantForm } from "@/features";
 interface OpenDetailsButtonProps {
-  id: number;
+  application: Application;
 }
-export function OpenDetailsButton({ id }: OpenDetailsButtonProps) {
+export function OpenDetailsButton({ application }: OpenDetailsButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <FaEye className={styles.eye} onClick={() => setIsOpen(true)} />
-      {isOpen && <DetailsModal id={id} onClose={() => setIsOpen(false)} />}
+      {isOpen && (
+        <DetailsModal
+          application={application}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 }
 
 interface DetailsModalProps {
-  id: number;
+  application: Application;
   onClose: () => void;
 }
-const DetailsModal = ({ id, onClose }: DetailsModalProps) => {
+const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
   const modalRef = useRef(null);
+
+  const role = getCookie("role")?.toLowerCase();
   useOnClickOutside(modalRef, onClose);
   return createPortal(
     <Modal
@@ -34,8 +45,71 @@ const DetailsModal = ({ id, onClose }: DetailsModalProps) => {
         <IoMdClose size={25} onClick={onClose} className={styles.closeModal} />
       }
     >
-      Modal {id}
+      <div className={styles.content}>
+        {role && <ContentLeft role={role} application={application} />}
+        <div className={styles.right}>
+          <Typography variant="adminTitle">Добавить</Typography>
+          {role && getFormByRole(role)}
+        </div>
+      </div>
     </Modal>,
     document.body,
+  );
+};
+const getFormByRole = (role: string) => {
+  switch (role) {
+    case "decan":
+      return <DecanForm />;
+    case "commandant":
+      return <KomendantForm />;
+    default:
+      return <></>;
+  }
+};
+const ContentLeft = ({
+  application,
+  role,
+}: {
+  application: Application;
+  role: string;
+}) => {
+  return (
+    <div className={styles.left}>
+      <Typography variant="adminTitle">Данные</Typography>
+      <Typography variant="adminSubtitle">ФИО</Typography>
+      <Typography variant="adminText">
+        {application.so_name} {application.name}
+      </Typography>
+      <Typography variant="adminSubtitle">Телефон</Typography>
+      <Typography variant="adminText">{application.tel}</Typography>
+      <Typography variant="adminSubtitle">Общежитие</Typography>
+      <Typography variant="adminText">{application.obshezhitie}</Typography>
+      <Typography variant="adminSubtitle">Факультет</Typography>
+      <Typography variant="adminText">{application.facultet}</Typography>
+      <Typography variant="adminSubtitle">Удостоверение</Typography>
+      <a className={styles.link} href={application.id_card} target="_blank">
+        Открыть
+      </a>
+      {(role === "commandant" || role === "specialist") && (
+        <>
+          <Typography variant="adminSubtitle">Направление</Typography>
+          <a
+            className={styles.link}
+            href={application.direction}
+            target="_blank"
+          >
+            Открыть
+          </a>
+          <Typography variant="adminSubtitle">Справка о учебе</Typography>
+          <a
+            className={styles.link}
+            href={application.certificate}
+            target="_blank"
+          >
+            Открыть
+          </a>
+        </>
+      )}
+    </div>
   );
 };

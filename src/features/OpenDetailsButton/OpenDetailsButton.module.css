@@ -7,3 +7,22 @@
   top: 20px;
   cursor: pointer;
 }
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.right {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.link {
+  text-decoration: underline;
+  color: var(--color-primary);
+}

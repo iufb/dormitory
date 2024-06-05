@@ -61,6 +61,6 @@ const FillTable = (idx: number, application: Application) => {
     case 2:
       return application.tel;
     case 3:
-      return <OpenDetailsButton id={application.iin_id} />;
+      return <OpenDetailsButton application={application} />;
   }
 };
