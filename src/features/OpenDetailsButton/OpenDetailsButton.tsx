@@ -47,21 +47,23 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
     >
       <div className={styles.content}>
         {role && <ContentLeft role={role} application={application} />}
-        <div className={styles.right}>
-          <Typography variant="adminTitle">Добавить</Typography>
-          {role && getFormByRole(role)}
-        </div>
+        {role && role !== "specialist" && (
+          <div className={styles.right}>
+            <Typography variant="adminTitle">Добавить</Typography>
+            {getFormByRole(role, application)}
+          </div>
+        )}
       </div>
     </Modal>,
     document.body,
   );
 };
-const getFormByRole = (role: string) => {
+const getFormByRole = (role: string, application: Application) => {
   switch (role) {
     case "decan":
-      return <DecanForm />;
+      return <DecanForm id={application.iin_id} />;
     case "commandant":
-      return <KomendantForm />;
+      return <KomendantForm id={application.iin_id} />;
     default:
       return <></>;
   }
@@ -90,7 +92,7 @@ const ContentLeft = ({
       <a className={styles.link} href={application.id_card} target="_blank">
         Открыть
       </a>
-      {(role === "commandant" || role === "specialist") && (
+      {role === "specialist" && (
         <>
           <Typography variant="adminSubtitle">Направление</Typography>
           <a
@@ -106,6 +108,14 @@ const ContentLeft = ({
             href={application.certificate}
             target="_blank"
           >
+            Открыть
+          </a>
+          <Typography variant="adminSubtitle">Договор</Typography>
+          <a className={styles.link} href={application.k_one} target="_blank">
+            Открыть
+          </a>
+          <Typography variant="adminSubtitle">Правила проживания</Typography>
+          <a className={styles.link} href={application.k_two} target="_blank">
             Открыть
           </a>
         </>

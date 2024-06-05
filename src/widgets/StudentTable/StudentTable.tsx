@@ -3,7 +3,7 @@ import styles from "./StudentTable.module.css";
 import { OpenDetailsButton } from "@/features";
 import { Application } from "@/shared/api";
 const columns = [
-  { Header: "№", accessor: "id" },
+  { Header: "ИИН", accessor: "id" },
   { Header: "ФИО", accessor: "name" },
   { Header: "Телефон", accessor: "phone" },
   { Header: "Просмотр", accessor: "show" },
@@ -14,7 +14,7 @@ const data = [
   { id: 3, name: "John Doe", date: 28, show: "john@example.com" },
 ];
 interface StudentTableProps {
-  applications: Application[] | null;
+  applications: Application[];
 }
 export const StudentTable = ({ applications }: StudentTableProps) => {
   return (
@@ -28,26 +28,24 @@ export const StudentTable = ({ applications }: StudentTableProps) => {
           ))}
         </tr>
       </thead>
-      {applications && applications.length > 0 ? (
-        <tbody className={styles.body}>
-          {applications.map((row, rowIndex) => (
-            <tr
-              key={rowIndex}
-              className={clsx(rowIndex % 2 == 0 ? styles.gray : styles.white)}
-            >
-              {columns.map((column, idx) => {
-                return (
-                  <td className={styles.cell} key={column.accessor}>
-                    {FillTable(idx, row)}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      ) : (
-        <p className={styles.noApplications}>Нет новых заявок.</p>
-      )}
+      <tbody className={styles.body}>
+        {applications.map((row, rowIndex) => (
+          <tr
+            key={rowIndex}
+            className={clsx(rowIndex % 2 == 0 ? styles.gray : styles.white)}
+          >
+            {columns.map((column, idx) => {
+              console.log(idx);
+
+              return (
+                <td className={styles.cell} key={column.accessor}>
+                  {FillTable(idx, row)}
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 };
@@ -55,7 +53,7 @@ export const StudentTable = ({ applications }: StudentTableProps) => {
 const FillTable = (idx: number, application: Application) => {
   switch (idx) {
     case 0:
-      return idx + 1;
+      return application.iin_id;
     case 1:
       return `${application.so_name} ${application.name}`;
     case 2:

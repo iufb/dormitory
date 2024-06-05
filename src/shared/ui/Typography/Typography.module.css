@@ -7,15 +7,15 @@
 }
 .adminTitle {
   color: var(--color-primary);
-  font-weight: bold;
   font-size: 25px;
 }
 .adminSubtitle {
-  color: var(--color-text-light);
+  color: var(--color-text-dark);
+  font-weight: bold;
   font-size: 22px;
 }
 .adminText {
-  color: var(--color-text-dark);
+  color: var(--color-text-light);
   font-weight: bold;
   font-size: 24px;
 }

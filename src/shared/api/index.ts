@@ -1,3 +1,5 @@
+import { getCookie } from "cookies-next";
+
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 const paths = {
   decan: "decan_view/",
@@ -51,9 +53,21 @@ export const CreateApplication = (data: FormData) => {
     body: { multipart: data },
   });
 };
+export const updateApplication = (
+  by: keyof typeof paths,
+  data: FormData,
+  id: number,
+) => {
+  return customFetch({
+    method: "PATCH",
+    path: `${paths[by]}${id}/`,
+    token: `Token ${getCookie("token")}`,
+    body: { multipart: data },
+  });
+};
 interface Request {
   path: string;
-  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "UPDATE";
   token?: string;
   query?: URLSearchParams | Record<string, any>;
   body?: { json?: unknown; multipart?: FormData };

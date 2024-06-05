@@ -43,7 +43,11 @@ export default async function AdminPanelPage({
           Панель управления - {role}
         </Typography>
       </header>
-      <StudentTable applications={applications} />
+      {applications && applications.length > 0 ? (
+        <StudentTable applications={applications} />
+      ) : (
+        <Typography variant="subtitle">Нет заявок</Typography>
+      )}
     </section>
   );
 }

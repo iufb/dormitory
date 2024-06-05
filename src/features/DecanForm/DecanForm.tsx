@@ -1,11 +1,75 @@
-import { Button, FileInput, Form } from "@/shared/ui";
+"use client";
+import { Application, updateApplication } from "@/shared/api";
+import { useRefetch, useRequest } from "@/shared/hooks";
+import { Button, Error, FileInput, Form, Success } from "@/shared/ui";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, useState } from "react";
+interface DecanFormProps {
+  id: number;
+}
+export const DecanForm = ({ id }: DecanFormProps) => {
+  const { loading, setLoading, error, setError, success, setSuccess } =
+    useRequest();
+  const [direction, setDirection] = useState<File | null>(null);
+  const [certificate, setCertificate] = useState<File | null>(null);
+  const { refetch } = useRefetch();
+  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    setLoading(true);
+    console.log({ direction, certificate });
 
-export const DecanForm = () => {
+    const data = new FormData();
+    data.append("direction", direction ? direction : "");
+    data.append("certificate", certificate ? certificate : "");
+    data.append("status", "commandant");
+    updateApplication("decan", data, id)
+      .then((data) => {
+        console.log(data);
+        setSuccess("Файлы успешно добавлены.");
+        setLoading(false);
+        refetch();
+      })
+      .catch((e) => {
+        setLoading(false);
+        setError(`Oшибка, ${e.detail ? e.detail : "что-то пошло не так."}`);
+      });
+  };
   return (
-    <Form>
-      <FileInput label="Направление" content="Выберите файл" />
-      <FileInput label="Справка о учебе" content="Выберите файл" />
-      <Button variant="contained" size="md">
+    <Form onSubmit={handleSubmit}>
+      <FileInput
+        label="Направление"
+        content="Выберите файл"
+        checked={!direction}
+        onChange={(e) => {
+          if (e.target.files) {
+            setDirection(e.target.files[0]);
+          }
+        }}
+        accept=".pdf"
+        required
+      />
+      <FileInput
+        label="Справка о учебе"
+        content="Выберите файл"
+        checked={!certificate}
+        onChange={(e) => {
+          if (e.target.files) {
+            setCertificate(e.target.files[0]);
+          }
+        }}
+        accept=".pdf"
+        required
+      />
+      {error && <Error>{error}</Error>}
+      {success && <Success>{success}</Success>}
+      <Button
+        disabled={loading}
+        loading={loading}
+        variant="contained"
+        size="md"
+      >
         Сохранить
       </Button>
     </Form>

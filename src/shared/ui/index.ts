@@ -3,6 +3,7 @@ export { Error } from "./Error/Error";
 export { Button } from "./Button/Button";
 export { FileInput } from "./FileInput/FileInput";
 export { Form } from "./Form/Form";
+export { Success } from "./Success/Success";
 export { Input } from "./Input/Input";
 export { Layout } from "./Layout/Layout";
 export { Modal } from "./Modal/Modal";
