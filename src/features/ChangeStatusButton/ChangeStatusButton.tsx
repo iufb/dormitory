@@ -7,14 +7,19 @@ import { useRouter } from "next/router";
 
 interface ChangeStatusButtonProps {
   id: number;
+  onClose: () => void;
 }
-export const ChangeStatusButton = ({ id }: ChangeStatusButtonProps) => {
+export const ChangeStatusButton = ({
+  id,
+  onClose,
+}: ChangeStatusButtonProps) => {
   const { refetch } = useRefetch();
   const role = getCookie("role");
   const handleClick = () => {
     if (role) {
       updateApplicationStatus(id, getStatus(role).value, role).then(() => {
         refetch();
+        onClose();
       });
     }
   };

@@ -100,7 +100,7 @@ export const CreateApplicationForm = () => {
         onChange={(e) => setIin(e.target.value)}
         label="ИИН"
         inputSize="lg"
-        type="text"
+        type="number"
       />
       <FileInput
         checked={!udo}

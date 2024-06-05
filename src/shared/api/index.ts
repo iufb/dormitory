@@ -20,6 +20,9 @@ export interface Application {
   k_one: string;
   k_two: string;
 }
+export const checkApplicationStatus = (id: number): Promise<Application> => {
+  return customFetch({ method: "GET", path: `student/${id}/` });
+};
 export const updateApplicationStatus = (
   id: number,
   status: string,

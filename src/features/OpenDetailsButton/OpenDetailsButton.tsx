@@ -47,7 +47,13 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
       }
     >
       <div className={styles.content}>
-        {role && <ContentLeft role={role} application={application} />}
+        {role && (
+          <ContentLeft
+            role={role}
+            application={application}
+            onClose={onClose}
+          />
+        )}
         {role && role !== "specialist" && (
           <div className={styles.right}>
             <Typography variant="adminTitle">Добавить</Typography>
@@ -72,9 +78,11 @@ const getFormByRole = (role: string, application: Application) => {
 const ContentLeft = ({
   application,
   role,
+  onClose,
 }: {
   application: Application;
   role: string;
+  onClose: () => void;
 }) => {
   return (
     <div className={styles.left}>
@@ -121,7 +129,9 @@ const ContentLeft = ({
           </a>
         </>
       )}
-      {role !== "decan" && <ChangeStatusButton id={application.iin_id} />}
+      {role !== "decan" && (
+        <ChangeStatusButton onClose={onClose} id={application.iin_id} />
+      )}
     </div>
   );
 };
