@@ -1,8 +1,17 @@
 import { getCookie } from "cookies-next";
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const roles = [
+  "decanlegal",
+  "decanlit",
+  "decanhuman",
+  "medic",
+  "commandant",
+  "specialist",
+];
 const paths = {
   decan: "decan_view/",
+  medic: "medic_view/",
   commandant: "commandant_view/",
   specialist: "specialist_view/",
 };
@@ -13,12 +22,13 @@ export interface Application {
   iin_id: number;
   tel: string;
   facultet: string;
-  obshezhitie: string;
   status: string;
   direction: string;
+  med_admission: string;
   certificate: string;
-  k_one: string;
-  k_two: string;
+  contract: string;
+  statement: string;
+  rules: string;
 }
 export const checkApplicationStatus = (id: number): Promise<Application> => {
   return customFetch({ method: "GET", path: `student/${id}/` });

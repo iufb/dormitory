@@ -1,0 +1,24 @@
+.input {
+  width: 100%;
+
+  padding: 10px 0;
+  color: var(--main-white);
+  border-radius: 10px;
+  border: 1px solid var(--color-text-light);
+  background-color: var(--color-base);
+  padding-left: 20px;
+  font-size: 20px;
+  transition: 0.1s var(--input-ease);
+  outline: none;
+  box-sizing: border-box;
+  outline: none;
+  &:focus {
+    outline: 1px solid var(--color-primary);
+  }
+  &:not(:placeholder-shown) ~ label,
+  &:focus ~ label {
+    top: 0px;
+    left: 10px;
+    font-size: var(--fz-sm);
+  }
+}

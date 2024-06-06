@@ -5,6 +5,7 @@ import {
   FileInput,
   Form,
   Input,
+  PhoneMask,
   Select,
   Success,
   Typography,
@@ -13,44 +14,50 @@ import styles from "./CreateApplicationForm.module.css";
 import { FormEvent, FormEventHandler, useState } from "react";
 import { CreateApplication } from "@/shared/api";
 import { useRequest } from "@/shared/hooks";
-const dormitories = ["Общежитие 1", "Общежитие 2"];
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { PatternFormat } from "react-number-format";
 const faculties = ["Факультет 1", "Факультет 2"];
+interface CreateApplicationForm {
+  so_name: string;
+  name: string;
+  iin_id: string;
+  id_card: FileList;
+}
 export const CreateApplicationForm = () => {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [phone, setPhone] = useState("");
-  const [iin, setIin] = useState("");
-  const [dormitory, setDormitory] = useState("");
+  const [tel, setTel] = useState("");
   const [faculty, setFaculty] = useState("");
-  const [udo, setUdo] = useState<File | null>(null);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<CreateApplicationForm>({ mode: "onBlur" });
+  console.log(tel);
+
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<CreateApplicationForm> = (data) => {
     setLoading(true);
     setError("");
     setSuccess("");
-    console.log({ name, surname, iin, dormitory, faculty, udo });
+    const uploadData = {
+      ...data,
+      id_card: data.id_card[0],
+      facultet: faculty,
+      tel,
+      status: "decan",
+    };
+    const formData = new FormData();
+    Object.keys(uploadData).forEach((key) =>
+      formData.append(key, uploadData[key as keyof typeof uploadData]),
+    );
+    console.log(uploadData);
 
-    const data = new FormData();
-    data.append("name", name);
-    data.append("so_name", surname);
-    data.append("iin_id", iin);
-    data.append("facultet", faculty);
-    data.append("obshezhitie", dormitory);
-    data.append("tel", phone);
-    data.append("id_card", udo ? udo : "");
-    data.append("status", "decan");
-    CreateApplication(data)
+    CreateApplication(formData)
       .then(() => {
         setSuccess("Заявка создана.");
-        setName("");
-        setIin("");
-        setSurname("");
         setFaculty("");
-        setPhone("");
-        setDormitory("");
-        setUdo(null);
         setLoading(false);
       })
       .catch((e) => {
@@ -58,67 +65,47 @@ export const CreateApplicationForm = () => {
         setError(`Oшибка, ${e.detail ? e.detail : "что-то пошло не так."}`);
       });
   };
-  const isDisabled = () => {
-    if (name == "") return true;
-    if (!surname) return true;
-    if (!iin) return true;
-    if (!dormitory) return true;
-    if (!faculty) return true;
-    if (!udo) return true;
-    return false;
-  };
-
   return (
-    <Form className={styles.form} onSubmit={onSubmit}>
+    <Form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Typography tag="h1" variant="subtitle">
         ОСТАВИТЬ ЗАЯВКУ НА ЗАСЕЛЕНИЕ В ОБЩЕЖИТИЕ ABU
       </Typography>
       <Input
-        value={surname}
-        onChange={(e) => setSurname(e.target.value)}
+        {...register("so_name")}
         label="Фaмилия"
         inputSize="lg"
         type="text"
+        required
       />
       <Input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        {...register("name")}
         label="Имя"
         inputSize="lg"
         type="text"
+        required
       />
+      <PhoneMask value={tel} onChange={(e) => setTel(e.target.value)} />
       <Input
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        label="Телефон"
-        inputSize="lg"
-        type="text"
-      />
-
-      <Input
-        value={iin}
-        onChange={(e) => setIin(e.target.value)}
+        {...register("iin_id", {
+          required: "Обязательное поле",
+          validate: (value) =>
+            value.length === 12 || "Длина должна быть равна 12",
+        })}
         label="ИИН"
         inputSize="lg"
         type="number"
       />
+      <ErrorMessage
+        errors={errors}
+        name="iin_id"
+        render={({ message }) => <Error>{message}</Error>}
+      />
       <FileInput
-        checked={!udo}
-        onChange={(e) => {
-          if (e.target.files) {
-            setUdo(e.target.files[0]);
-          }
-        }}
+        {...register("id_card")}
         label="Удостоверение"
         content="Выберите файл"
         accept=".pdf"
         required
-      />
-      <Select
-        label="Общежитие"
-        onSelect={(item) => setDormitory(item)}
-        items={dormitories}
-        getValueString={(item) => item}
       />
       <Select
         label="Факультет"
@@ -126,7 +113,6 @@ export const CreateApplicationForm = () => {
         items={faculties}
         getValueString={(item) => item}
       />
-
       {error && <Error>{error}</Error>}
       {success && <Success>{success}</Success>}
       <Button
@@ -134,7 +120,7 @@ export const CreateApplicationForm = () => {
         variant="contained"
         loading={loading}
         size="lg"
-        disabled={isDisabled()}
+        disabled={!tel || !faculty}
       >
         Отправить
       </Button>
