@@ -5,7 +5,7 @@ import { Button, Error, FileInput, Form, Success } from "@/shared/ui";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 interface DecanFormProps {
-  id: number;
+  id: string;
 }
 export const DecanForm = ({ id }: DecanFormProps) => {
   const { loading, setLoading, error, setError, success, setSuccess } =

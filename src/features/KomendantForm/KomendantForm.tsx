@@ -4,7 +4,7 @@ import { useRefetch, useRequest } from "@/shared/hooks";
 import { Form, FileInput, Button, Success, Error } from "@/shared/ui";
 import { useState, ChangeEvent } from "react";
 
-export const KomendantForm = ({ id }: { id: number }) => {
+export const KomendantForm = ({ id }: { id: string }) => {
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
   const [kOne, setKOne] = useState<File | null>(null);

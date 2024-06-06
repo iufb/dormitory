@@ -4,16 +4,33 @@ import { StudentTable } from "@/widgets";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Application, getApplicationsByRole } from "@/shared/api";
+import { faculties } from "@/shared/contants";
+const filterByDecan = (applications: Application[], role: string) => {
+  return applications.filter((app) => {
+    if (role == "decanlegal") {
+      return app.facultet === faculties[0];
+    }
+    if (role == "decanit") {
+      return app.facultet === faculties[1];
+    }
+    return app.facultet === faculties[2];
+  });
+};
 async function getApplications(): Promise<Application[] | null> {
   const role = cookies().get("role")?.value.toLowerCase();
   const token = cookies().get("token")?.value;
 
   if (role && token) {
-    const res = await getApplicationsByRole(role, token)
+    const res = await getApplicationsByRole(
+      role.startsWith("decan") ? "decan" : role,
+      token,
+    )
       .then((data) => {
-        console.log(data);
-
-        return data;
+        if (role.startsWith("decan")) {
+          return filterByDecan(data, role);
+        } else {
+          return data;
+        }
       })
       .catch((e) => {
         console.log(e);

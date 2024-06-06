@@ -14,6 +14,7 @@ export const PhoneMask = ({ value, onChange }: PhoneMaskProps) => {
       format="+7 (7##) ### ## ##"
       allowEmptyFormatting
       required
+      mask={"_"}
     />
   );
 };

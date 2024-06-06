@@ -6,7 +6,7 @@ import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
 
 interface ChangeStatusButtonProps {
-  id: number;
+  id: string;
   onClose: () => void;
 }
 export const ChangeStatusButton = ({

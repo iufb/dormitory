@@ -19,7 +19,7 @@ export interface Application {
   name: string;
   so_name: string;
   id_card: string;
-  iin_id: number;
+  iin_id: string;
   tel: string;
   facultet: string;
   status: string;
@@ -34,7 +34,7 @@ export const checkApplicationStatus = (id: number): Promise<Application> => {
   return customFetch({ method: "GET", path: `student/${id}/` });
 };
 export const updateApplicationStatus = (
-  id: number,
+  id: string,
   status: string,
   role: string,
 ) => {
@@ -83,7 +83,7 @@ export const CreateApplication = (data: FormData) => {
 export const updateApplication = (
   by: keyof typeof paths,
   data: FormData,
-  id: number,
+  id: string,
 ) => {
   return customFetch({
     method: "PATCH",

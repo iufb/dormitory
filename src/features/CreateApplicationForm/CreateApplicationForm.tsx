@@ -17,7 +17,7 @@ import { useRequest } from "@/shared/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { PatternFormat } from "react-number-format";
-const faculties = ["Факультет 1", "Факультет 2"];
+import { faculties } from "@/shared/contants";
 interface CreateApplicationForm {
   so_name: string;
   name: string;

@@ -66,9 +66,10 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
   );
 };
 const getFormByRole = (role: string, application: Application) => {
+  if (role.startsWith("decan")) {
+    return <DecanForm id={application.iin_id} />;
+  }
   switch (role) {
-    case "decan":
-      return <DecanForm id={application.iin_id} />;
     case "commandant":
       return <KomendantForm id={application.iin_id} />;
     default:
@@ -93,8 +94,6 @@ const ContentLeft = ({
       </Typography>
       <Typography variant="adminSubtitle">Телефон</Typography>
       <Typography variant="adminText">{application.tel}</Typography>
-      <Typography variant="adminSubtitle">Общежитие</Typography>
-      <Typography variant="adminText">{application.obshezhitie}</Typography>
       <Typography variant="adminSubtitle">Факультет</Typography>
       <Typography variant="adminText">{application.facultet}</Typography>
       <Typography variant="adminSubtitle">Удостоверение</Typography>
@@ -120,16 +119,29 @@ const ContentLeft = ({
             Открыть
           </a>
           <Typography variant="adminSubtitle">Договор</Typography>
-          <a className={styles.link} href={application.k_one} target="_blank">
+          <a
+            className={styles.link}
+            href={application.contract}
+            target="_blank"
+          >
             Открыть
           </a>
+          <Typography variant="adminSubtitle">Положение</Typography>
+          <a
+            className={styles.link}
+            href={application.statement}
+            target="_blank"
+          >
+            Открыть
+          </a>
+
           <Typography variant="adminSubtitle">Правила проживания</Typography>
-          <a className={styles.link} href={application.k_two} target="_blank">
+          <a className={styles.link} href={application.rules} target="_blank">
             Открыть
           </a>
         </>
       )}
-      {role !== "decan" && (
+      {role.startsWith("Decan") && (
         <ChangeStatusButton onClose={onClose} id={application.iin_id} />
       )}
     </div>
