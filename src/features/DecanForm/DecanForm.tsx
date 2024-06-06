@@ -39,6 +39,7 @@ export const DecanForm = ({ id }: DecanFormProps) => {
   return (
     <Form onSubmit={handleSubmit}>
       <FileInput
+        selected={direction?.name}
         label="Направление"
         content="Выберите файл"
         checked={!direction}
@@ -51,6 +52,7 @@ export const DecanForm = ({ id }: DecanFormProps) => {
         required
       />
       <FileInput
+        selected={certificate?.name}
         label="Справка о учебе"
         content="Выберите файл"
         checked={!certificate}

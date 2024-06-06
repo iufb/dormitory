@@ -4,6 +4,10 @@
   font-size: var(--fz-sm);
   cursor: pointer;
 }
+.selected {
+  color: var(--color-primary);
+  margin-left: 10px;
+}
 .wrapper {
   margin-top: 10px;
   position: relative;

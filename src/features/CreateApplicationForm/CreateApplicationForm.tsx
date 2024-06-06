@@ -30,10 +30,10 @@ export const CreateApplicationForm = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     watch,
     formState: { errors },
   } = useForm<CreateApplicationForm>({ mode: "onBlur" });
-  console.log(tel);
 
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
@@ -62,7 +62,13 @@ export const CreateApplicationForm = () => {
       })
       .catch((e) => {
         setLoading(false);
-        setError(`Oшибка, ${e.detail ? e.detail : "что-то пошло не так."}`);
+        console.log(e, "EROERO");
+
+        if ("iin_id" in e) {
+          setError(`Oшибка, заявка с таким ИИН уже существует.`);
+        } else {
+          setError(`Oшибка, ${e.detail ? e.detail : "что-то пошло не так."}`);
+        }
       });
   };
   return (
@@ -101,8 +107,9 @@ export const CreateApplicationForm = () => {
         render={({ message }) => <Error>{message}</Error>}
       />
       <FileInput
+        selected={watch("id_card") && watch("id_card")[0].name}
         {...register("id_card")}
-        label="Удостоверение"
+        label="Удостоверение (pdf)"
         content="Выберите файл"
         accept=".pdf"
         required
