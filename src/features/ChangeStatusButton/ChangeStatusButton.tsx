@@ -31,9 +31,11 @@ export const ChangeStatusButton = ({
 };
 const getStatus = (role: string) => {
   switch (role) {
+    case "medic":
+      return { label: "Деканату", value: "decan" };
     case "specialist":
       return { label: "Коменданту", value: "commandant" };
     default:
-      return { label: "Деканату", value: "decan" };
+      return { label: "Медику", value: "medic" };
   }
 };

@@ -23,7 +23,7 @@ export const DecanForm = ({ id }: DecanFormProps) => {
     const data = new FormData();
     data.append("direction", direction ? direction : "");
     data.append("certificate", certificate ? certificate : "");
-    data.append("status", "commandant");
+    data.append("status", "medic");
     updateApplication("decan", data, id)
       .then((data) => {
         console.log(data);

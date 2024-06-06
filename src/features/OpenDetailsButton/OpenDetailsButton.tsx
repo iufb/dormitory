@@ -10,7 +10,12 @@ import styles from "./OpenDetailsButton.module.css";
 import { Application } from "@/shared/api";
 import { cookies } from "next/headers";
 import { getCookie } from "cookies-next";
-import { ChangeStatusButton, DecanForm, KomendantForm } from "@/features";
+import {
+  ChangeStatusButton,
+  DecanForm,
+  KomendantForm,
+  MedicForm,
+} from "@/features";
 import { appendFile } from "fs";
 interface OpenDetailsButtonProps {
   application: Application;
@@ -72,6 +77,8 @@ const getFormByRole = (role: string, application: Application) => {
   switch (role) {
     case "commandant":
       return <KomendantForm id={application.iin_id} />;
+    case "medic":
+      return <MedicForm id={application.iin_id} />;
     default:
       return <></>;
   }
@@ -100,7 +107,7 @@ const ContentLeft = ({
       <a className={styles.link} href={application.id_card} target="_blank">
         Открыть
       </a>
-      {role === "specialist" && (
+      {!role.startsWith("decan") && (
         <>
           <Typography variant="adminSubtitle">Направление</Typography>
           <a
@@ -118,6 +125,22 @@ const ContentLeft = ({
           >
             Открыть
           </a>
+        </>
+      )}
+      {!role.startsWith("decan") && role !== "medic" && (
+        <>
+          <Typography variant="adminSubtitle">Мед. допуск</Typography>
+          <a
+            className={styles.link}
+            href={application.med_admission}
+            target="_blank"
+          >
+            Открыть
+          </a>
+        </>
+      )}
+      {role === "specialist" && (
+        <>
           <Typography variant="adminSubtitle">Договор</Typography>
           <a
             className={styles.link}
@@ -141,7 +164,7 @@ const ContentLeft = ({
           </a>
         </>
       )}
-      {role.startsWith("Decan") && (
+      {!role.startsWith("decan") && (
         <ChangeStatusButton onClose={onClose} id={application.iin_id} />
       )}
     </div>

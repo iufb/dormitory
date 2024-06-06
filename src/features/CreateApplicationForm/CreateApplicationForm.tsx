@@ -32,6 +32,7 @@ export const CreateApplicationForm = () => {
     handleSubmit,
     getValues,
     watch,
+    reset,
     formState: { errors },
   } = useForm<CreateApplicationForm>({ mode: "onBlur" });
 
@@ -58,6 +59,7 @@ export const CreateApplicationForm = () => {
       .then(() => {
         setSuccess("Заявка создана.");
         setFaculty("");
+        reset();
         setLoading(false);
       })
       .catch((e) => {
@@ -107,7 +109,7 @@ export const CreateApplicationForm = () => {
         render={({ message }) => <Error>{message}</Error>}
       />
       <FileInput
-        selected={watch("id_card") && watch("id_card")[0].name}
+        selected={watch("id_card") && watch("id_card")[0]?.name}
         {...register("id_card")}
         label="Удостоверение (pdf)"
         content="Выберите файл"

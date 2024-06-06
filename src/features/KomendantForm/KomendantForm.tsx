@@ -7,19 +7,21 @@ import { useState, ChangeEvent } from "react";
 export const KomendantForm = ({ id }: { id: string }) => {
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
-  const [kOne, setKOne] = useState<File | null>(null);
-  const [kTwo, setKTwo] = useState<File | null>(null);
+  const [contract, setContract] = useState<File | null>(null);
+  const [rules, setRules] = useState<File | null>(null);
+  const [statement, setStatement] = useState<File | null>(null);
   const { refetch } = useRefetch();
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     setSuccess("");
     setLoading(true);
-    console.log({ direction: kOne, certificate: kTwo });
+    console.log({ direction: contract, certificate: rules });
 
     const data = new FormData();
-    data.append("k_one", kOne ? kOne : "");
-    data.append("k_two", kTwo ? kTwo : "");
+    data.append("contract", contract ? contract : "");
+    data.append("rules", rules ? rules : "");
+    data.append("statement", statement ? statement : "");
     data.append("status", "specialist");
     updateApplication("commandant", data, id)
       .then((data) => {
@@ -37,24 +39,40 @@ export const KomendantForm = ({ id }: { id: string }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <FileInput
+        selected={contract?.name}
         label="Договор"
         content="Выберите файл"
-        checked={!kOne}
+        checked={!contract}
         onChange={(e) => {
           if (e.target.files) {
-            setKOne(e.target.files[0]);
+            setContract(e.target.files[0]);
           }
         }}
         accept=".pdf"
         required
       />
       <FileInput
-        label="Правила проживания"
+        selected={statement?.name}
+        label="Положение"
         content="Выберите файл"
-        checked={!kTwo}
+        checked={!statement}
         onChange={(e) => {
           if (e.target.files) {
-            setKTwo(e.target.files[0]);
+            setStatement(e.target.files[0]);
+          }
+        }}
+        accept=".pdf"
+        required
+      />
+
+      <FileInput
+        selected={rules?.name}
+        label="Правила проживания"
+        content="Выберите файл"
+        checked={!rules}
+        onChange={(e) => {
+          if (e.target.files) {
+            setRules(e.target.files[0]);
           }
         }}
         accept=".pdf"

@@ -64,6 +64,8 @@ const parseApplicationStatus = (application: Application) => {
   switch (application.status) {
     case "decan":
       return "у деканата";
+    case "medic":
+      return "у медика, подойдите в Студ.Дом №1";
     case "commandant":
       return "у коменданта";
     case "specialist":
