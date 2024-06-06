@@ -41,7 +41,6 @@ export const KomendantForm = ({ id }: { id: string }) => {
       <FileInput
         selected={contract?.name}
         label="Договор"
-        content="Выберите файл"
         checked={!contract}
         onChange={(e) => {
           if (e.target.files) {
@@ -54,7 +53,6 @@ export const KomendantForm = ({ id }: { id: string }) => {
       <FileInput
         selected={statement?.name}
         label="Положение"
-        content="Выберите файл"
         checked={!statement}
         onChange={(e) => {
           if (e.target.files) {

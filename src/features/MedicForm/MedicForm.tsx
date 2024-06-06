@@ -35,7 +35,6 @@ export const MedicForm = ({ id }: { id: string }) => {
       <FileInput
         selected={medAdmission?.name}
         label="Мед. допуск"
-        content="Выберите файл"
         checked={!medAdmission}
         onChange={(e) => {
           if (e.target.files) {

@@ -41,7 +41,6 @@ export const DecanForm = ({ id }: DecanFormProps) => {
       <FileInput
         selected={direction?.name}
         label="Направление"
-        content="Выберите файл"
         checked={!direction}
         onChange={(e) => {
           if (e.target.files) {
@@ -54,7 +53,6 @@ export const DecanForm = ({ id }: DecanFormProps) => {
       <FileInput
         selected={certificate?.name}
         label="Справка о учебе"
-        content="Выберите файл"
         checked={!certificate}
         onChange={(e) => {
           if (e.target.files) {

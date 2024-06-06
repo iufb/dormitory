@@ -18,6 +18,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { PatternFormat } from "react-number-format";
 import { faculties } from "@/shared/contants";
+import { useTranslations } from "next-intl";
 interface CreateApplicationForm {
   so_name: string;
   name: string;
@@ -27,6 +28,7 @@ interface CreateApplicationForm {
 export const CreateApplicationForm = () => {
   const [tel, setTel] = useState("");
   const [faculty, setFaculty] = useState("");
+  const t = useTranslations("forms.createApplication");
   const {
     register,
     handleSubmit,
@@ -57,37 +59,39 @@ export const CreateApplicationForm = () => {
 
     CreateApplication(formData)
       .then(() => {
-        setSuccess("Заявка создана.");
+        setSuccess(t("success"));
         setFaculty("");
         reset();
         setLoading(false);
       })
       .catch((e) => {
         setLoading(false);
-        console.log(e, "EROERO");
-
         if ("iin_id" in e) {
-          setError(`Oшибка, заявка с таким ИИН уже существует.`);
+          setError(t("errors.iin_id"));
         } else {
-          setError(`Oшибка, ${e.detail ? e.detail : "что-то пошло не так."}`);
+          setError(
+            t("errors.base", {
+              detail: `${e.detail ? e.detail : "что-то пошло не так."}`,
+            }),
+          );
         }
       });
   };
   return (
     <Form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Typography tag="h1" variant="subtitle">
-        ОСТАВИТЬ ЗАЯВКУ НА ЗАСЕЛЕНИЕ В ОБЩЕЖИТИЕ ABU
+        {t("title")}
       </Typography>
       <Input
         {...register("so_name")}
-        label="Фaмилия"
+        label={t("so_name")}
         inputSize="lg"
         type="text"
         required
       />
       <Input
         {...register("name")}
-        label="Имя"
+        label={t("name")}
         inputSize="lg"
         type="text"
         required
@@ -95,11 +99,10 @@ export const CreateApplicationForm = () => {
       <PhoneMask value={tel} onChange={(e) => setTel(e.target.value)} />
       <Input
         {...register("iin_id", {
-          required: "Обязательное поле",
-          validate: (value) =>
-            value.length === 12 || "Длина должна быть равна 12",
+          required: t("validation.required"),
+          validate: (value) => value.length === 12 || t("validation.length"),
         })}
-        label="ИИН"
+        label={t("iin_id")}
         inputSize="lg"
         type="number"
       />
@@ -111,13 +114,12 @@ export const CreateApplicationForm = () => {
       <FileInput
         selected={watch("id_card") && watch("id_card")[0]?.name}
         {...register("id_card")}
-        label="Удостоверение (pdf)"
-        content="Выберите файл"
+        label={`${t("id_card")} (pdf)`}
         accept=".pdf"
         required
       />
       <Select
-        label="Факультет"
+        label={t("faculty")}
         onSelect={(item) => setFaculty(item)}
         items={faculties}
         getValueString={(item) => item}
@@ -131,7 +133,7 @@ export const CreateApplicationForm = () => {
         size="lg"
         disabled={!tel || !faculty}
       >
-        Отправить
+        {t("button")}
       </Button>
     </Form>
   );

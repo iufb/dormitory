@@ -1,5 +1,34 @@
 {
-  "Index": {
-    "title": "Привет, мир!"
+  "mainPage": {
+    "title": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ <br></br> ALIKHAN BOKEIKHAN UNIVERSITY"
+  },
+  "navigation": {
+    "first": "Главная",
+    "second": "Положение",
+    "third": "Подача заявления",
+    "forth": "Статус заявления"
+  },
+  "fileInput": {
+    "label": "Выберите файл"
+  },
+  "forms": {
+    "createApplication": {
+      "title": "ОСТАВИТЬ ЗАЯВКУ НА ЗАСЕЛЕНИЕ В ОБЩЕЖИТИЕ ABU",
+      "so_name": "Фамилия",
+      "name": "Имя",
+      "iin_id": "ИИН",
+      "id_card": "Удостоверение",
+      "faculty": "Факультет",
+      "button": "Отправить",
+      "success": "Заявка создана.",
+      "validation": {
+        "required": "Обязательное поле",
+        "length": "Длина должна быть равна 12"
+      },
+      "errors": {
+        "iin_id": "Oшибка, заявка с таким ИИН уже существует.",
+        "base": "Oшибка, {detail} "
+      }
+    }
   }
 }

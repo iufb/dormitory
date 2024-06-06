@@ -1,17 +1,16 @@
 import { ComponentProps, ForwardedRef, forwardRef } from "react";
 import styles from "./FileInput.module.css";
+import { useTranslations } from "next-intl";
 interface FileInputProps extends ComponentProps<"input"> {
   label: string;
-  content: string;
   selected?: string;
 }
 export const FileInput = forwardRef(
   (
-    { label, content, selected, ...inputProps }: FileInputProps,
+    { label, selected, ...inputProps }: FileInputProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
-    console.log(inputProps.value, "VALUE >>>");
-
+    const t = useTranslations("fileInput");
     return (
       <div className={styles.container}>
         <label className={styles.label} htmlFor={label}>
@@ -21,7 +20,7 @@ export const FileInput = forwardRef(
         <div className={styles.wrapper}>
           <input ref={ref} id={label} type="file" {...inputProps} />
           <label className={styles.content} htmlFor={label}>
-            {content}
+            {t("label")}
           </label>
         </div>
       </div>

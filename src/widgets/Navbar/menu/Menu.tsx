@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -5,6 +6,7 @@ import styles from "./Menu.module.css";
 import { IconBaseProps } from "react-icons";
 import { FaHome, FaBook, FaRegListAlt } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { useTranslations } from "next-intl";
 interface MenuProps {
   isMobile: boolean;
   expanded?: boolean;
@@ -16,27 +18,27 @@ type Link = {
   path: string;
 };
 export const links: Link[] = [
-  { icon: (props) => <FaHome {...props} />, label: "Главная", path: "/" },
+  { icon: (props) => <FaHome {...props} />, label: "first", path: "/" },
   {
     icon: (props) => <FaBook {...props} />,
-    label: "Положение",
+    label: "second",
     path: "/rules",
   },
   {
     icon: (props) => <FaRegListAlt {...props} />,
-    label: "Подача заявления",
+    label: "third",
     path: "/submitting",
   },
   {
     icon: (props) => <FaMagnifyingGlass {...props} />,
-    label: "Статус заявления",
+    label: "forth",
     path: "/status",
   },
 ];
 export const Menu = ({ expanded, onPress, isMobile }: MenuProps) => {
   const pathname = usePathname();
   const locale = pathname.split("/")[1];
-
+  const t = useTranslations("navigation");
   return (
     <ul className={styles.linkList}>
       {links.map(({ icon, label, path }) => {
@@ -56,9 +58,9 @@ export const Menu = ({ expanded, onPress, isMobile }: MenuProps) => {
           >
             {icon({ size: isMobile ? 40 : 45 })}
             {isMobile ? (
-              <span className={styles.label}> {label}</span>
+              <span className={styles.label}>{t(label)}</span>
             ) : (
-              expanded && <span className={styles.label}> {label}</span>
+              expanded && <span className={styles.label}>{t(label)}</span>
             )}
           </Link>
         );
