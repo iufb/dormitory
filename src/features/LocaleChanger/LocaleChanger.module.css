@@ -1,7 +1,7 @@
 .wrapper {
   position: absolute;
   right: 10%;
-  top: 10%;
+  top: 2%;
   z-index: 10;
 }
 .select {
@@ -13,4 +13,10 @@
 }
 .select option {
   color: black;
+}
+
+@media screen and (max-width: 500px) {
+  .wrapper {
+    top: 10%;
+  }
 }

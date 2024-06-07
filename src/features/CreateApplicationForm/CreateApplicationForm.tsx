@@ -111,19 +111,20 @@ export const CreateApplicationForm = () => {
         name="iin_id"
         render={({ message }) => <Error>{message}</Error>}
       />
-      <FileInput
+       <Select
+        label={t("faculty")}
+        onSelect={(item) => setFaculty(item)}
+        items={faculties}
+        getValueString={(item) => item}
+      />
+     <FileInput
         selected={watch("id_card") && watch("id_card")[0]?.name}
         {...register("id_card")}
         label={`${t("id_card")} (pdf)`}
         accept=".pdf"
         required
       />
-      <Select
-        label={t("faculty")}
-        onSelect={(item) => setFaculty(item)}
-        items={faculties}
-        getValueString={(item) => item}
-      />
+
       {error && <Error>{error}</Error>}
       {success && <Success>{success}</Success>}
       <Button
