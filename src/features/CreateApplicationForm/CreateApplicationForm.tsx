@@ -61,6 +61,7 @@ export const CreateApplicationForm = () => {
       .then(() => {
         setSuccess(t("success"));
         setFaculty("");
+        setTel("");
         reset();
         setLoading(false);
       })
@@ -111,13 +112,13 @@ export const CreateApplicationForm = () => {
         name="iin_id"
         render={({ message }) => <Error>{message}</Error>}
       />
-       <Select
+      <Select
+        selected={faculty}
         label={t("faculty")}
         onSelect={(item) => setFaculty(item)}
         items={faculties}
-        getValueString={(item) => item}
       />
-     <FileInput
+      <FileInput
         selected={watch("id_card") && watch("id_card")[0]?.name}
         {...register("id_card")}
         label={`${t("id_card")} (pdf)`}

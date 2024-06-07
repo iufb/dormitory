@@ -7,7 +7,8 @@
   border: 1px solid var(--color-text-light);
   background-color: var(--color-base);
   padding-left: 20px;
-  font-size: 20px;
+  font-size: 16px;
+  color: var(--color-primary);
   transition: 0.1s var(--input-ease);
   outline: none;
   box-sizing: border-box;

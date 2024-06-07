@@ -1,6 +1,9 @@
 .container {
   position: relative;
 }
+.label {
+  color: var(--color-primary);
+}
 .wrapper {
   padding: 14px 20px;
   border-radius: 10px;

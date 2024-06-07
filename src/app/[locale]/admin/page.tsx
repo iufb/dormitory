@@ -69,7 +69,7 @@ export default async function AdminPanelPage({
   );
 }
 const getRoleLabel = (role: string) => {
-  if (role.startsWith("Decan")) return "Деканат";
+  if (role.toLowerCase().startsWith("decan")) return "Деканат";
   switch (role) {
     case "medic":
       return "Медик";
