@@ -11,10 +11,12 @@ import {
   Success,
   Typography,
 } from "@/shared/ui";
+import { useTranslations } from "next-intl";
 import { ChangeEvent, useState } from "react";
 
 export const CheckApplicationForm = () => {
   const [id, setId] = useState("");
+  const t = useTranslations("forms.checkApplication");
   const { error, setError, success, setSuccess, loading, setLoading } =
     useRequest();
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
@@ -25,20 +27,24 @@ export const CheckApplicationForm = () => {
     checkApplicationStatus(+id)
       .then((data) => {
         setLoading(false);
-        setSuccess(parseApplicationStatus(data));
+        setSuccess(t(`success.${data.status}`));
       })
       .catch((e) => {
         setLoading(false);
-        setError("Ошибка. Попробуйте позже.");
+        if (e.message == "notFound") {
+          setError(t("errors.notFound"));
+        } else {
+          setError(t("errors.base"));
+        }
       });
   };
   return (
     <Form onSubmit={handleSubmit}>
       <Typography tag="h1" variant="subtitle">
-        Проверить статус заявления
+        {t("title")}
       </Typography>
       <Input
-        label="ИИН"
+        label={t("iin_id")}
         inputSize="lg"
         type="number"
         value={id}
@@ -46,7 +52,7 @@ export const CheckApplicationForm = () => {
         required
       />
       {error && <Error>{error}</Error>}
-      {success && <Success>На рассмотрении {success}</Success>}
+      {success && <Success>{success}</Success>}
       <Button
         type="submit"
         loading={loading}
@@ -54,23 +60,8 @@ export const CheckApplicationForm = () => {
         variant="contained"
         size="lg"
       >
-        Отправить
+        {t("button")}
       </Button>
     </Form>
   );
-};
-
-const parseApplicationStatus = (application: Application) => {
-  switch (application.status) {
-    case "decan":
-      return "у деканата";
-    case "medic":
-      return "у медика, подойдите в Студ.Дом №1";
-    case "commandant":
-      return "у коменданта";
-    case "specialist":
-      return "у специалиста по работе с молодежью";
-    default:
-      return "";
-  }
 };

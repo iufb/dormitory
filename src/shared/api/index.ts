@@ -139,7 +139,7 @@ const customFetch = async (params: Request) => {
   if (isJson) {
     throw await response.json();
   }
-  // if (response.status === 401) {
-  //   throw { message: 'unauthorized' }
-  // }
+  if (response.status === 404) {
+    throw { message: "notFound" };
+  }
 };
