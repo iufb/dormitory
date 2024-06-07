@@ -57,7 +57,7 @@ export default async function AdminPanelPage({
     <section className={styles.wrapper}>
       <header className={styles.header}>
         <Typography tag="h1" variant="whiteSubtitle">
-          Панель управления - {role}
+          Панель управления - {role && getRoleLabel(role)}
         </Typography>
       </header>
       {applications && applications.length > 0 ? (
@@ -68,3 +68,16 @@ export default async function AdminPanelPage({
     </section>
   );
 }
+const getRoleLabel = (role: string) => {
+  if (role.startsWith("Decan")) return "Деканат";
+  switch (role) {
+    case "medic":
+      return "Медик";
+    case "commandant":
+      return "Комендант";
+    case "specialist":
+      return "Специалист по работе с молодежью";
+    default:
+      return "Роль не найдена";
+  }
+};

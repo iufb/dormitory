@@ -1,9 +1,18 @@
 import { CheckApplicationForm } from "@/features";
 import { BgWrapper, PageTransition } from "@/shared/ui";
 import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Status",
-};
+import { getTranslations } from "next-intl/server";
+export async function generateMetadata({
+  params,
+}: {
+  params: any;
+}): Promise<Metadata> {
+  const t = await getTranslations("metadata");
+  return {
+    title: t("checkApplication.title"),
+    description: t("checkApplication.desc"),
+  };
+}
 export default function Status() {
   return (
     <PageTransition>

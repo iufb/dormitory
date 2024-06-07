@@ -1,4 +1,22 @@
 {
+  "metadata": {
+    "home": {
+      "title": "Главная",
+      "desc": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY"
+    },
+    "rules": {
+      "title": "Положение",
+      "desc": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY - ПОЛОЖЕНИЕ"
+    },
+    "createApplication": {
+      "title": "Создать заявку",
+      "desc": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY  - Создать заявку"
+    },
+    "checkApplication": {
+      "title": "Проверить заявку",
+      "desc": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY - Проверить заявку"
+    }
+  },
   "mainPage": {
     "title": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ <br></br> ALIKHAN BOKEIKHAN UNIVERSITY"
   },
