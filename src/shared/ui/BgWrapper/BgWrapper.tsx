@@ -7,7 +7,7 @@ export const BgWrapper = ({ blurred }: BgWrapperProps) => {
     <div
       className={styles.bgWrapper}
       style={{
-        backgroundImage: `url(${blurred ? "/blur-bg.png" : "/bg.png"})`,
+        backgroundImage: `url(${blurred ? "/blur-bg.webp" : "/bg.webp"})`,
       }}
     />
   );
