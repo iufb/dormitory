@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Menu } from "../menu/Menu";
 import { useState } from "react";
 import clsx from "clsx";
-import { links } from "../Navbar";
 import { IoClose } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { headers } from "next/headers";

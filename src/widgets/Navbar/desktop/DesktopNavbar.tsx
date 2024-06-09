@@ -4,7 +4,6 @@ import styles from "./DesktopNavbar.module.css";
 import Image from "next/image";
 import { useState } from "react";
 import clsx from "clsx";
-import { links } from "../Navbar";
 import { Menu } from "../menu/Menu";
 
 export const DesktopNavbar = () => {
