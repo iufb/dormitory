@@ -16,7 +16,7 @@
 @media screen and (max-width: 500px) {
   .main {
     padding-left: 0;
-    padding-top: 65px;
-    height: calc(100vh - 65px);
+    padding-top: 110px;
+    height: calc(100vh - 110px);
   }
 }
