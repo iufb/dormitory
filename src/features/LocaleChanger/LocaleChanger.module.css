@@ -1,8 +1,10 @@
 .wrapper {
-  position: absolute;
-  right: 10%;
-  top: 2%;
+  /* position: absolute; */
+  /* right: 10%; */
+  /* top: 2%; */
   z-index: 10;
+  align-self: flex-end;
+  margin-right: 10%;
 }
 .select {
   background: inherit;

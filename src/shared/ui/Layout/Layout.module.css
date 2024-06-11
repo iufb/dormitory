@@ -10,14 +10,23 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  flex-direction: column;
   overflow: hidden;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 @media screen and (max-width: 500px) {
   .main {
-    padding-left: 0;
-    padding-top: 100px;
+    padding: 100px 10px 0;
     max-height: calc(100vh - 100px);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
   }
 }

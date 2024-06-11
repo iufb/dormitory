@@ -15,9 +15,9 @@ export async function generateMetadata({
 }
 export default function Submitting() {
   return (
-    <PageTransition>
+    <>
       <BgWrapper />
       <CreateApplicationForm />
-    </PageTransition>
+    </>
   );
 }

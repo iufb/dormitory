@@ -15,9 +15,9 @@ export async function generateMetadata({
 }
 export default function Rules() {
   return (
-    <PageTransition>
+    <>
       <BgWrapper />
       <RulesView />
-    </PageTransition>
+    </>
   );
 }

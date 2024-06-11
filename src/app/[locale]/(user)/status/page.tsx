@@ -1,5 +1,5 @@
 import { CheckApplicationForm } from "@/features";
-import { BgWrapper, PageTransition } from "@/shared/ui";
+import { BgWrapper } from "@/shared/ui";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 export async function generateMetadata({
@@ -15,9 +15,9 @@ export async function generateMetadata({
 }
 export default function Status() {
   return (
-    <PageTransition>
+    <>
       <BgWrapper />
       <CheckApplicationForm />
-    </PageTransition>
+    </>
   );
 }
