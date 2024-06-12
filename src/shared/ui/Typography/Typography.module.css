@@ -52,6 +52,9 @@
   }
 }
 @media screen and (max-width: 590px) {
+  .title {
+    font-size: 38px;
+  }
   .subtitle {
     font-size: 25px;
   }

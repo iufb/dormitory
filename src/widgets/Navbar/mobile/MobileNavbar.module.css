@@ -11,7 +11,7 @@
   transition: max-height 0.4s ease-in-out;
 }
 .expanded {
-  max-height: 300px;
+  max-height: 400px;
 }
 .normal {
   max-height: 65px;
@@ -26,4 +26,8 @@
   right: 20px;
   top: 20px;
   cursor: pointer;
+}
+.menu {
+  position: relative;
+  height: 100%;
 }

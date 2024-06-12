@@ -1,0 +1,34 @@
+.wrapper {
+  position: fixed;
+  left: 30px;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 25px;
+  color: var(--color-base);
+  animation: fadeIn 1s ease-in-out forwards;
+}
+.content {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.wrapper a {
+  text-decoration: none;
+  color: var(--color-base);
+}
+@media screen and (max-width: 500px) {
+  .wrapper {
+    position: absolute;
+    font-size: 18px;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

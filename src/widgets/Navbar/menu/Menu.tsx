@@ -1,12 +1,13 @@
 "use client";
+import { Contacts } from "@/shared/ui";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import styles from "./Menu.module.css";
 import { IconBaseProps } from "react-icons";
-import { FaHome, FaBook, FaRegListAlt } from "react-icons/fa";
+import { FaBook, FaHome, FaRegListAlt } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useTranslations } from "next-intl";
+import styles from "./Menu.module.css";
 interface MenuProps {
   isMobile: boolean;
   expanded?: boolean;
@@ -65,6 +66,7 @@ export const Menu = ({ expanded, onPress, isMobile }: MenuProps) => {
           </Link>
         );
       })}
+      {expanded && <Contacts />}
     </ul>
   );
 };

@@ -10,11 +10,8 @@ export const Layout = ({ navbar, localeChanger, children }: LayoutProps) => {
   return (
     <section className={styles.layout}>
       {navbar}
-      <main className={clsx(styles.main, styles["fade-in"])}>
-        {localeChanger}
-        <div className={styles.bgWrapper} />
-        {children}
-      </main>
+      <div className={styles.locale}>{localeChanger}</div>
+      <main className={clsx(styles.main, styles["fade-in"])}>{children}</main>
     </section>
   );
 };

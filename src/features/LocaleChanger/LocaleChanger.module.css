@@ -1,10 +1,4 @@
 .wrapper {
-  /* position: absolute; */
-  /* right: 10%; */
-  /* top: 2%; */
-  z-index: 10;
-  align-self: flex-end;
-  margin-right: 10%;
 }
 .select {
   background: inherit;
@@ -19,6 +13,7 @@
 
 @media screen and (max-width: 500px) {
   .wrapper {
-    top: 10%;
+    position: absolute;
+    right: 20px;
   }
 }

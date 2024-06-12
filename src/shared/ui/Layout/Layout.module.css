@@ -1,25 +1,34 @@
 .layout {
   width: 100%;
-  min-height: 100vh;
-  height: 100%;
-  overflow-y: hidden;
+  height: 100vh;
+}
+.locale {
+  position: absolute;
+  right: 10%;
+  top: 2%;
+  z-index: 10;
 }
 .main {
   padding-left: 100px;
   position: relative;
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: scroll;
   animation: fadeIn 1s ease-in-out forwards;
 }
 
 @media screen and (max-width: 500px) {
   .main {
-    padding: 100px 10px 0;
-    max-height: calc(100vh - 100px);
+    padding: 65px 10px 0px;
+    height: calc(100vh - 65px);
+    overflow: hidden;
+  }
+  .locale {
+    display: none;
   }
 }
 @keyframes fadeIn {
