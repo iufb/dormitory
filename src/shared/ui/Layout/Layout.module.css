@@ -31,11 +31,3 @@
     display: none;
   }
 }
-@keyframes fadeIn {
-  from {
-    opacity: 0.6;
-  }
-  to {
-    opacity: 1;
-  }
-}

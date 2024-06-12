@@ -1,16 +1,12 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Navbar } from "@/widgets";
-import { Layout } from "@/shared/ui";
 import { LocaleChanger } from "@/features";
+import { Layout } from "@/shared/ui";
+import { Navbar } from "@/widgets";
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-// export const metadata = () => {
-//   return {
-//     title: "Главная",
-//     description: "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY",
-//   };
-// };
+import { headers } from "next/headers";
+import { UAParser } from "ua-parser-js";
+
 export async function generateMetadata({
   params,
 }: {
@@ -27,9 +23,29 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const mobile = useIsMobileDevice();
+  console.log(mobile);
   return (
-    <Layout navbar={<Navbar />} localeChanger={<LocaleChanger />}>
+    <Layout
+      navbar={<Navbar mobile={mobile} />}
+      localeChanger={<LocaleChanger />}
+    >
       {children}
     </Layout>
   );
 }
+
+const useIsMobileDevice = () => {
+  if (typeof process === "undefined") {
+    throw new Error(
+      "[Server method] you are importing a server-only module outside of server"
+    );
+  }
+
+  const { get } = headers();
+  const ua = get("user-agent");
+
+  const device = new UAParser(ua || "").getDevice();
+
+  return device.type === "mobile";
+};

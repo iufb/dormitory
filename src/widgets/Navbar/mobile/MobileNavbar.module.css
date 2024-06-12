@@ -9,6 +9,7 @@
   align-items: center;
   padding: 0px 20px;
   transition: max-height 0.4s ease-in-out;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 .expanded {
   max-height: 400px;

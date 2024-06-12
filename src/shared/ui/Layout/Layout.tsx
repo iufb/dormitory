@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import styles from "./Layout.module.css";
 interface LayoutProps {
   navbar: ReactNode;
@@ -8,10 +8,12 @@ interface LayoutProps {
 }
 export const Layout = ({ navbar, localeChanger, children }: LayoutProps) => {
   return (
-    <section className={styles.layout}>
-      {navbar}
-      <div className={styles.locale}>{localeChanger}</div>
-      <main className={clsx(styles.main, styles["fade-in"])}>{children}</main>
-    </section>
+    <Suspense fallback={<div>Loading</div>}>
+      <section className={styles.layout}>
+        {navbar}
+        <div className={styles.locale}>{localeChanger}</div>
+        <main className={clsx(styles.main, styles["fade-in"])}>{children}</main>
+      </section>
+    </Suspense>
   );
 };
