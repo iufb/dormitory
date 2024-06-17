@@ -1,5 +1,13 @@
-.table {
+.wrapper {
   max-width: 1200px;
+  width: 100%;
+  display: inline;
+}
+.overflow {
+  max-height: 80%;
+  overflow-y: scroll;
+}
+.table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 10px;

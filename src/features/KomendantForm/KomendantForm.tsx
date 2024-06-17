@@ -1,27 +1,28 @@
 "use client";
 import { updateApplication } from "@/shared/api";
 import { useRefetch, useRequest } from "@/shared/hooks";
-import { Form, FileInput, Button, Success, Error } from "@/shared/ui";
-import { useState, ChangeEvent } from "react";
+import { Button, Error, FileInput, Form, Success } from "@/shared/ui";
+import { ChangeEvent, useState } from "react";
 
 export const KomendantForm = ({ id }: { id: string }) => {
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
   const [contract, setContract] = useState<File | null>(null);
-  const [rules, setRules] = useState<File | null>(null);
-  const [statement, setStatement] = useState<File | null>(null);
+  const [statementAndRules, setStatementAndRules] = useState<File | null>(null);
   const { refetch } = useRefetch();
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     setSuccess("");
     setLoading(true);
-    console.log({ direction: contract, certificate: rules });
+    console.log({ direction: contract, certificate: statementAndRules });
 
     const data = new FormData();
     data.append("contract", contract ? contract : "");
-    data.append("rules", rules ? rules : "");
-    data.append("statement", statement ? statement : "");
+    data.append(
+      "statement_and_rules",
+      statementAndRules ? statementAndRules : ""
+    );
     data.append("status", "specialist");
     updateApplication("commandant", data, id)
       .then((data) => {
@@ -51,26 +52,13 @@ export const KomendantForm = ({ id }: { id: string }) => {
         required
       />
       <FileInput
-        selected={statement?.name}
-        label="Положение"
-        checked={!statement}
-        onChange={(e) => {
-          if (e.target.files) {
-            setStatement(e.target.files[0]);
-          }
-        }}
-        accept=".pdf"
-        required
-      />
-
-      <FileInput
-        selected={rules?.name}
-        label="Правила проживания"
+        selected={statementAndRules?.name}
+        label="Правила проживания и положение"
         content="Выберите файл"
-        checked={!rules}
+        checked={!statementAndRules}
         onChange={(e) => {
           if (e.target.files) {
-            setRules(e.target.files[0]);
+            setStatementAndRules(e.target.files[0]);
           }
         }}
         accept=".pdf"

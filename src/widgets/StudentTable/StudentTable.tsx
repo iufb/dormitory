@@ -1,9 +1,9 @@
-import clsx from "clsx";
-import styles from "./StudentTable.module.css";
 import { OpenDetailsButton } from "@/features";
 import { Application } from "@/shared/api";
+import clsx from "clsx";
+import styles from "./StudentTable.module.css";
 const columns = [
-  { Header: "ИИН", accessor: "id" },
+  { Header: "№", accessor: "id" },
   { Header: "ФИО", accessor: "name" },
   { Header: "Телефон", accessor: "phone" },
   { Header: "Просмотр", accessor: "show" },
@@ -18,42 +18,58 @@ interface StudentTableProps {
 }
 export const StudentTable = ({ applications }: StudentTableProps) => {
   return (
-    <table className={styles.table}>
-      <thead className={styles.head}>
-        <tr>
-          {columns.map((column) => (
-            <th className={styles.th} key={column.accessor}>
-              {column.Header}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody className={styles.body}>
-        {applications.map((row, rowIndex) => (
-          <tr
-            key={rowIndex}
-            className={clsx(rowIndex % 2 == 0 ? styles.gray : styles.white)}
-          >
-            {columns.map((column, idx) => {
-              console.log(idx);
+    <div
+      className={clsx(
+        styles.wrapper,
+        applications.length >= 14 && styles.overflow
+      )}
+    >
+      <table className={styles.table}>
+        <thead className={styles.head}>
+          <tr>
+            {columns.map((column) => (
+              <th className={styles.th} key={column.accessor}>
+                {column.Header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className={styles.body}>
+          {applications
+            .map((row, idx) => {
+              return { ...row, id: idx + 1 };
+            })
+            .map((row, rowIndex) => {
+              console.log(row, "?RROW>");
 
               return (
-                <td className={styles.cell} key={column.accessor}>
-                  {FillTable(idx, row)}
-                </td>
+                <tr
+                  key={rowIndex}
+                  className={clsx(
+                    rowIndex % 2 == 0 ? styles.gray : styles.white
+                  )}
+                >
+                  {columns.map((column, idx) => {
+                    console.log(rowIndex);
+                    return (
+                      <td className={styles.cell} key={column.accessor}>
+                        {FillTable(idx, row)}
+                      </td>
+                    );
+                  })}
+                </tr>
               );
             })}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   );
 };
 
-const FillTable = (idx: number, application: Application) => {
+const FillTable = (idx: number, application: Application & { id: number }) => {
   switch (idx) {
     case 0:
-      return application.iin_id;
+      return application.id;
     case 1:
       return `${application.so_name} ${application.name}`;
     case 2:

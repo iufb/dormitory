@@ -1,5 +1,4 @@
 "use client";
-import { Contacts } from "@/shared/ui";
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -7,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { IconBaseProps } from "react-icons";
 import { FaBook, FaHome, FaRegListAlt } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { IoIosContacts } from "react-icons/io";
 import styles from "./Menu.module.css";
 interface MenuProps {
   isMobile: boolean;
@@ -34,6 +34,11 @@ export const links: Link[] = [
     icon: (props) => <FaMagnifyingGlass {...props} />,
     label: "forth",
     path: "/status",
+  },
+  {
+    icon: (props) => <IoIosContacts {...props} />,
+    label: "fifth",
+    path: "/contacts",
   },
 ];
 export const Menu = ({ expanded, onPress, isMobile }: MenuProps) => {
@@ -66,7 +71,6 @@ export const Menu = ({ expanded, onPress, isMobile }: MenuProps) => {
           </Link>
         );
       })}
-      {expanded && <Contacts />}
     </ul>
   );
 };

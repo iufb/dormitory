@@ -1,10 +1,10 @@
+import { Application, getApplicationsByRole } from "@/shared/api";
+import { faculties } from "@/shared/contants";
 import { Typography } from "@/shared/ui";
-import styles from "./page.module.css";
 import { StudentTable } from "@/widgets";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { Application, getApplicationsByRole } from "@/shared/api";
-import { faculties } from "@/shared/contants";
+import styles from "./page.module.css";
 const filterByDecan = (applications: Application[], role: string) => {
   return applications.filter((app) => {
     if (role == "decanlegal") {
@@ -23,7 +23,7 @@ async function getApplications(): Promise<Application[] | null> {
   if (role && token) {
     const res = await getApplicationsByRole(
       role.startsWith("decan") ? "decan" : role,
-      token,
+      token
     )
       .then((data) => {
         if (role.startsWith("decan")) {
@@ -34,8 +34,7 @@ async function getApplications(): Promise<Application[] | null> {
       })
       .catch((e) => {
         console.log(e);
-
-        throw new Error(`Failed to fetch data `);
+        throw new Error(`Failed to fetch data`);
       });
     return res;
   }

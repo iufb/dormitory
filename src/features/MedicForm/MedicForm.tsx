@@ -1,13 +1,13 @@
 "use client";
 import { updateApplication } from "@/shared/api";
-import { useRequest, useRefetch } from "@/shared/hooks";
-import { FileInput, Success, Button, Error, Form } from "@/shared/ui";
-import { useState, ChangeEvent } from "react";
+import { useRefetch, useRequest } from "@/shared/hooks";
+import { Button, Error, Form, Select, Success } from "@/shared/ui";
+import { ChangeEvent, useState } from "react";
 
 export const MedicForm = ({ id }: { id: string }) => {
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
-  const [medAdmission, setMedAdmission] = useState<File | null>(null);
+  const [medAdmission, setMedAdmission] = useState<string>("");
   const { refetch } = useRefetch();
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,7 +16,7 @@ export const MedicForm = ({ id }: { id: string }) => {
     setLoading(true);
 
     const data = new FormData();
-    data.append("med_admission", medAdmission ? medAdmission : "");
+    data.append("med_admission", medAdmission === "Да" ? "true" : "false");
     data.append("status", "commandant");
     updateApplication("medic", data, id)
       .then((data) => {
@@ -32,18 +32,13 @@ export const MedicForm = ({ id }: { id: string }) => {
   };
   return (
     <Form onSubmit={handleSubmit}>
-      <FileInput
-        selected={medAdmission?.name}
-        label="Мед. допуск"
-        checked={!medAdmission}
-        onChange={(e) => {
-          if (e.target.files) {
-            setMedAdmission(e.target.files[0]);
-          }
-        }}
-        accept=".pdf"
-        required
+      <Select
+        label="Одобрен медиком"
+        items={["Да", "Нет"]}
+        selected={medAdmission}
+        onSelect={(item) => setMedAdmission(item)}
       />
+
       {error && <Error>{error}</Error>}
       {success && <Success>{success}</Success>}
       <Button

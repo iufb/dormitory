@@ -1,16 +1,7 @@
 "use client";
-import { Application, checkApplicationStatus } from "@/shared/api";
+import { checkApplicationStatus } from "@/shared/api";
 import { useRequest } from "@/shared/hooks";
-import {
-  Button,
-  Error,
-  FileInput,
-  Form,
-  Input,
-  Select,
-  Success,
-  Typography,
-} from "@/shared/ui";
+import { Button, Error, Form, Input, Success, Typography } from "@/shared/ui";
 import { useTranslations } from "next-intl";
 import { ChangeEvent, useState } from "react";
 
@@ -34,7 +25,8 @@ export const CheckApplicationForm = () => {
         if (e.message == "notFound") {
           setError(t("errors.notFound"));
         } else {
-          setError(t("errors.base"));
+          console.log(e);
+          setError(t(`${"errors.base"} ${e}`));
         }
       });
   };

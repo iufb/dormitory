@@ -1,6 +1,5 @@
 import { LocaleChanger } from "@/features";
 import { useOnClickOutside } from "@/shared/hooks";
-import { Contacts } from "@/shared/ui";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -48,7 +47,6 @@ export const MobileNavbar = () => {
       {expanded && (
         <div className={styles.menu}>
           <Menu isMobile />
-          <Contacts />
         </div>
       )}
     </nav>

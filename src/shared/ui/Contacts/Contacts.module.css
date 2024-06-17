@@ -1,13 +1,39 @@
 .wrapper {
-  position: fixed;
-  left: 30px;
-  bottom: 10px;
+  width: 50%;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 10px;
+  padding: 20px;
   font-size: 25px;
-  color: var(--color-base);
+  background-color: var(--color-base);
+  border-radius: 20px;
   animation: fadeIn 1s ease-in-out forwards;
+}
+.contentWrapper {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(2, 1fr);
+
+  color: var(--color-base);
+}
+.contentWrapper > .container:last-child {
+  grid-column: 1/3;
+  display: flex;
+  align-items: center;
+}
+.container {
+  display: flex;
+
+  font-size: 20px;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--color-primary);
+  padding: 10px;
+  border-radius: 10px;
+}
+.container h2 {
+  text-align: center;
 }
 .content {
   display: flex;
@@ -18,9 +44,31 @@
   text-decoration: none;
   color: var(--color-base);
 }
-@media screen and (max-width: 500px) {
+.payment {
+  background-color: var(--color-primary);
+  color: var(--color-base);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.payment p {
+  margin-top: 15px;
+}
+@media screen and (max-width: 1065px) {
   .wrapper {
-    position: absolute;
-    font-size: 18px;
+    width: 90%;
+    max-height: 500px;
+    overflow-y: scroll;
+  }
+  .contentWrapper {
+    grid-template-columns: 1fr;
+  }
+  .contentWrapper div {
+    grid-column: 1/3;
+  }
+  .container {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
   }
 }

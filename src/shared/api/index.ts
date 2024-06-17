@@ -24,11 +24,10 @@ export interface Application {
   facultet: string;
   status: string;
   direction: string;
-  med_admission: string;
+  med_admission: boolean;
   certificate: string;
   contract: string;
-  statement: string;
-  rules: string;
+  statement_and_rules: string;
 }
 export const checkApplicationStatus = (id: number): Promise<Application> => {
   return customFetch({ method: "GET", path: `student/${id}/` });
@@ -36,7 +35,7 @@ export const checkApplicationStatus = (id: number): Promise<Application> => {
 export const updateApplicationStatus = (
   id: string,
   status: string,
-  role: string,
+  role: string
 ) => {
   const data = new FormData();
   data.append("status", status);
@@ -49,7 +48,7 @@ export const updateApplicationStatus = (
 };
 export const getApplicationsByRole = (
   role: string,
-  token: string,
+  token: string
 ): Promise<Application[]> => {
   const path = paths[role as keyof typeof paths];
 
@@ -83,7 +82,7 @@ export const CreateApplication = (data: FormData) => {
 export const updateApplication = (
   by: keyof typeof paths,
   data: FormData,
-  id: string,
+  id: string
 ) => {
   return customFetch({
     method: "PATCH",

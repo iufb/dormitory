@@ -1,8 +1,7 @@
 "use client";
-import { Application, updateApplication } from "@/shared/api";
+import { updateApplication } from "@/shared/api";
 import { useRefetch, useRequest } from "@/shared/hooks";
 import { Button, Error, FileInput, Form, Success } from "@/shared/ui";
-import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 interface DecanFormProps {
   id: string;
@@ -52,7 +51,7 @@ export const DecanForm = ({ id }: DecanFormProps) => {
       />
       <FileInput
         selected={certificate?.name}
-        label="Справка о учебе"
+        label="Справка о месте учебы"
         checked={!certificate}
         onChange={(e) => {
           if (e.target.files) {

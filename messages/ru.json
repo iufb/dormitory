@@ -2,29 +2,59 @@
   "metadata": {
     "home": {
       "title": "Главная",
-      "desc": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY"
+      "desc": "ДОМ СТУДЕНТОВ ALIKHAN BOKEIKHAN UNIVERSITY"
     },
     "rules": {
       "title": "Положение",
-      "desc": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY - ПОЛОЖЕНИЕ"
+      "desc": "ДОМ СТУДЕНТОВ ALIKHAN BOKEIKHAN UNIVERSITY - ПОЛОЖЕНИЕ"
     },
     "createApplication": {
       "title": "Создать заявку",
-      "desc": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY  - Создать заявку"
+      "desc": "ДОМ СТУДЕНТОВ ALIKHAN BOKEIKHAN UNIVERSITY  - Создать заявку"
     },
     "checkApplication": {
       "title": "Проверить заявку",
-      "desc": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ ALIKHAN BOKEIKHAN UNIVERSITY - Проверить заявку"
+      "desc": "ДОМ СТУДЕНТОВ ALIKHAN BOKEIKHAN UNIVERSITY - Проверить заявку"
+    },
+    "contacts": {
+      "title": "Контакты & Оплата",
+      "desc": "ДОМ СТУДЕНТОВ ALIKHAN BOKEIKHAN UNIVERSITY - Контакты & Оплата"
     }
   },
+  "contacts": {
+    "titleOne": "Контакты",
+    "titleTwo": "Оплата",
+    "values": [
+      {
+        "heading": "Комендант ДОМ СТУДЕНТОВ  №1",
+        "name": "Абдугалиева Айнаш Сарсембековна",
+        "tel": "+7 708 860 11 54",
+        "location": "ул.Ильяшева, 94"
+      },
+      {
+        "heading": "Комендант ДОМ СТУДЕНТОВ  №2",
+        "name": "Кәдірбеков Бейбіт Кәмалбекұлы  ",
+        "tel": "+7 775 175 34 84",
+        "location": "ул.Каржаубайулы, 249К"
+      },
+      {
+        "heading": "ДЕПАРТАМЕНТ ПО ОРГАНИЗАЦИОННО-МЕТОДИЧЕСКОЙ РАБОТЕ С МОЛОДЕЖЬЮ",
+        "name": "",
+        "tel": "8(722)242-32-24 (внут.129)",
+        "location": "ул.Мәңгілік ел, 11, №26 каб."
+      }
+    ],
+    "payment": "<p> Учреждение образования «Alikhan Bokeikhan University» </p> <p> Республика Казахстан, 071400, область Абай, г. Семей, ул.  Мәңгілік ел, д.  11 </p> <p> БИН: 980440002042 </p> <p> Банковские реквизиты: </p> <p> БИК: HSBKKZKX </p> <p> ИИК: KZ 976010261000026178 </p> <p> Банк: АО «Народный Банк Казахстана» </p> <p> КБЕ: 17 </p> <p> e-mail: semey@abu.edu.kz </p>"
+  },
   "mainPage": {
-    "title": "ЭЛЕКТРОННОЕ ОБЩЕЖИТИЕ <br></br> ALIKHAN BOKEIKHAN UNIVERSITY"
+    "title": "ДОМ СТУДЕНТОВ  <br></br> ALIKHAN BOKEIKHAN UNIVERSITY"
   },
   "navigation": {
     "first": "Главная",
     "second": "Положение",
     "third": "Подача заявления",
-    "forth": "Статус заявления"
+    "forth": "Статус заявления",
+    "fifth": "Контакты & Оплата"
   },
   "fileInput": {
     "label": "Выберите файл"

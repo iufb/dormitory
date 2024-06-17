@@ -1,22 +1,19 @@
 "use client";
-import { useOnClickOutside } from "@/shared/hooks";
-import { Button, Modal, Typography } from "@/shared/ui";
-import Link from "next/link";
-import { useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { FaEye } from "react-icons/fa";
-import { IoMdClose } from "react-icons/io";
-import styles from "./OpenDetailsButton.module.css";
-import { Application } from "@/shared/api";
-import { cookies } from "next/headers";
-import { getCookie } from "cookies-next";
 import {
   ChangeStatusButton,
   DecanForm,
   KomendantForm,
   MedicForm,
 } from "@/features";
-import { appendFile } from "fs";
+import { Application } from "@/shared/api";
+import { useOnClickOutside } from "@/shared/hooks";
+import { Modal, Typography } from "@/shared/ui";
+import { getCookie } from "cookies-next";
+import { useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { FaEye } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+import styles from "./OpenDetailsButton.module.css";
 interface OpenDetailsButtonProps {
   application: Application;
 }
@@ -67,7 +64,7 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
         )}
       </div>
     </Modal>,
-    document.body,
+    document.body
   );
 };
 const getFormByRole = (role: string, application: Application) => {
@@ -99,6 +96,9 @@ const ContentLeft = ({
       <Typography variant="adminText">
         {application.so_name} {application.name}
       </Typography>
+      <Typography variant="adminSubtitle">ИИН</Typography>
+      <Typography variant="adminText">{application.iin_id}</Typography>
+
       <Typography variant="adminSubtitle">Телефон</Typography>
       <Typography variant="adminText">{application.tel}</Typography>
       <Typography variant="adminSubtitle">Факультет</Typography>
@@ -130,13 +130,12 @@ const ContentLeft = ({
       {!role.startsWith("decan") && role !== "medic" && (
         <>
           <Typography variant="adminSubtitle">Мед. допуск</Typography>
-          <a
-            className={styles.link}
-            href={application.med_admission}
-            target="_blank"
-          >
-            Открыть
-          </a>
+
+          <Typography variant="adminText">
+            {application.med_admission
+              ? "Одобрен медиком"
+              : "Не одобрен медиком"}
+          </Typography>
         </>
       )}
       {role === "specialist" && (
@@ -149,17 +148,14 @@ const ContentLeft = ({
           >
             Открыть
           </a>
-          <Typography variant="adminSubtitle">Положение</Typography>
+          <Typography variant="adminSubtitle">
+            Положение и Правила проживания
+          </Typography>
           <a
             className={styles.link}
-            href={application.statement}
+            href={application.statement_and_rules}
             target="_blank"
           >
-            Открыть
-          </a>
-
-          <Typography variant="adminSubtitle">Правила проживания</Typography>
-          <a className={styles.link} href={application.rules} target="_blank">
             Открыть
           </a>
         </>
