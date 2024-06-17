@@ -1,6 +1,6 @@
 import { getCookie } from "cookies-next";
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const backendUrl = "https://studdom.abu.edu.kz"
 const roles = [
   "decanlegal",
   "decanlit",
