@@ -27,7 +27,16 @@
   font-size: var(--fz-md);
   text-wrap: nowrap;
   flex-wrap: bold;
+  -webkit-animation: fadein 0.5s ease-in-out; /* Safari and Chrome */
+  -moz-animation: fadein 0.5s ease-in-out; /* Firefox */
+  -o-animation: fadein 0.5s ease-in-out; /* Opera */
+  animation: fadein 0.5s ease-in-out;
+  font-size: var(--fz-md);
+  white-space: nowrap;
+  text-wrap: nowrap;
+  flex-wrap: bold;
 }
+
 .active {
   color: var(--color-text-active);
   fill: var(--color-text-active);

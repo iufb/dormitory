@@ -6,6 +6,9 @@
   left: 0;
   background-color: var(--color-primary);
   width: 100%;
+  -moz-transition: max-width 0.3s ease-in-out; /* Firefox */
+  -webkit-transition: max-width 0.3s ease-in-out; /* Safari and Chrome */
+  -o-transition: max-width 0.3s ease-in-out; /* Opera */
   transition: max-width 0.3s ease-in-out;
   overflow: hidden;
 }
@@ -42,8 +45,12 @@
   fill: var(--color-base);
 }
 .label {
+  -webkit-animation: fadein 0.5s ease-in-out; /* Safari and Chrome */
+  -moz-animation: fadein 0.5s ease-in-out; /* Firefox */
+  -o-animation: fadein 0.5s ease-in-out; /* Opera */
   animation: fadein 0.5s ease-in-out;
   font-size: var(--fz-md);
+  white-space: nowrap;
   text-wrap: nowrap;
   flex-wrap: bold;
 }
