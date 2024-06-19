@@ -4,7 +4,7 @@
   margin: 0 10px;
   box-sizing: border-box;
 }
-@media screen and (max-height: 770px) {
+@media screen and (max-height: 620px) {
   .form {
     max-height: 500px;
     margin: 0;
