@@ -17,10 +17,14 @@
   justify-content: center;
   gap: 10px;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: hidden;
   animation: fadeIn 1s ease-in-out forwards;
 }
-
+@media screen and (max-height: 900px) {
+  .main {
+    overflow-y: scroll;
+  }
+}
 @media screen and (max-width: 500px) {
   .main {
     padding: 65px 10px 0px;

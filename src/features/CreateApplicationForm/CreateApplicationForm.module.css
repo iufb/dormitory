@@ -4,10 +4,16 @@
   margin: 0 10px;
   box-sizing: border-box;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-height: 770px) {
   .form {
     max-height: 500px;
     margin: 0;
+    overflow-y: scroll;
+  }
+}
+@media screen and (max-width: 500px) {
+  .form {
+    max-height: 500px;
     overflow-y: scroll;
   }
 }
