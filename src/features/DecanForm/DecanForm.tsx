@@ -5,8 +5,9 @@ import { Button, Error, FileInput, Form, Success } from "@/shared/ui";
 import { ChangeEvent, useState } from "react";
 interface DecanFormProps {
   id: string;
+  close: () => void;
 }
-export const DecanForm = ({ id }: DecanFormProps) => {
+export const DecanForm = ({ id, close }: DecanFormProps) => {
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
   const [direction, setDirection] = useState<File | null>(null);
@@ -29,6 +30,7 @@ export const DecanForm = ({ id }: DecanFormProps) => {
         setSuccess("Файлы успешно добавлены.");
         setLoading(false);
         refetch();
+        close();
       })
       .catch((e) => {
         setLoading(false);

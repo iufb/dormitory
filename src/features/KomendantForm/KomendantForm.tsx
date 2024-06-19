@@ -4,7 +4,13 @@ import { useRefetch, useRequest } from "@/shared/hooks";
 import { Button, Error, FileInput, Form, Success } from "@/shared/ui";
 import { ChangeEvent, useState } from "react";
 
-export const KomendantForm = ({ id }: { id: string }) => {
+export const KomendantForm = ({
+  id,
+  close,
+}: {
+  id: string;
+  close: () => void;
+}) => {
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
   const [contract, setContract] = useState<File | null>(null);
@@ -29,6 +35,7 @@ export const KomendantForm = ({ id }: { id: string }) => {
         console.log(data);
         setSuccess("Файлы успешно добавлены.");
         refetch();
+        close();
         setLoading(false);
       })
       .catch((e) => {

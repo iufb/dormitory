@@ -4,7 +4,7 @@ import { useRefetch, useRequest } from "@/shared/hooks";
 import { Button, Error, Form, Select, Success } from "@/shared/ui";
 import { ChangeEvent, useState } from "react";
 
-export const MedicForm = ({ id }: { id: string }) => {
+export const MedicForm = ({ id, close }: { id: string; close: () => void }) => {
   const { loading, setLoading, error, setError, success, setSuccess } =
     useRequest();
   const [medAdmission, setMedAdmission] = useState<string>("");
@@ -24,6 +24,7 @@ export const MedicForm = ({ id }: { id: string }) => {
         setSuccess("Файлы успешно добавлены.");
         setLoading(false);
         refetch();
+        close();
       })
       .catch((e) => {
         setLoading(false);

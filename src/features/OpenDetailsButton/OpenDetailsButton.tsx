@@ -59,7 +59,7 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
         {role && role !== "specialist" && (
           <div className={styles.right}>
             <Typography variant="adminTitle">Добавить</Typography>
-            {getFormByRole(role, application)}
+            {getFormByRole(role, application, onClose)}
           </div>
         )}
       </div>
@@ -67,15 +67,19 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
     document.body
   );
 };
-const getFormByRole = (role: string, application: Application) => {
+const getFormByRole = (
+  role: string,
+  application: Application,
+  close: () => void
+) => {
   if (role.startsWith("decan")) {
-    return <DecanForm id={application.iin_id} />;
+    return <DecanForm close={close} id={application.iin_id} />;
   }
   switch (role) {
     case "commandant":
-      return <KomendantForm id={application.iin_id} />;
+      return <KomendantForm close={close} id={application.iin_id} />;
     case "medic":
-      return <MedicForm id={application.iin_id} />;
+      return <MedicForm close={close} id={application.iin_id} />;
     default:
       return <></>;
   }
