@@ -29,8 +29,7 @@ export const DecanForm = ({ id, close }: DecanFormProps) => {
         console.log(data);
         setSuccess("Файлы успешно добавлены.");
         setLoading(false);
-        refetch();
-        close();
+        refetch(close);
       })
       .catch((e) => {
         setLoading(false);

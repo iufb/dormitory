@@ -23,8 +23,7 @@ export const MedicForm = ({ id, close }: { id: string; close: () => void }) => {
         console.log(data);
         setSuccess("Файлы успешно добавлены.");
         setLoading(false);
-        refetch();
-        close();
+        refetch(close);
       })
       .catch((e) => {
         setLoading(false);

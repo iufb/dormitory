@@ -34,8 +34,7 @@ export const KomendantForm = ({
       .then((data) => {
         console.log(data);
         setSuccess("Файлы успешно добавлены.");
-        refetch();
-        close();
+        refetch(close);
         setLoading(false);
       })
       .catch((e) => {

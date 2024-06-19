@@ -1,9 +1,8 @@
 "use client";
 import { updateApplicationStatus } from "@/shared/api";
-import { useRefetch } from "@/shared/hooks";
-import { Button } from "@/shared/ui";
+import { useRefetch, useRequest } from "@/shared/hooks";
+import { Button, Error, Success } from "@/shared/ui";
 import { getCookie } from "cookies-next";
-import { useRouter } from "next/router";
 
 interface ChangeStatusButtonProps {
   id: string;
@@ -15,18 +14,40 @@ export const ChangeStatusButton = ({
 }: ChangeStatusButtonProps) => {
   const { refetch } = useRefetch();
   const role = getCookie("role");
+  const { loading, setLoading, error, setError, success, setSuccess } =
+    useRequest();
   const handleClick = () => {
+    setLoading(true);
+    setError("");
+    setSuccess("");
     if (role) {
-      updateApplicationStatus(id, getStatus(role).value, role).then(() => {
-        refetch();
-        onClose();
-      });
+      updateApplicationStatus(id, getStatus(role).value, role)
+        .then(() => {
+          setLoading(false);
+          refetch(onClose);
+          setSuccess("Документы вернуты");
+        })
+        .catch((e) => {
+          setLoading(false);
+          console.log(e);
+          setError("Oшибка");
+        });
     }
   };
   return (
-    <Button variant="contained" size="sm" onClick={handleClick}>
-      Вернуть {role && getStatus(role).label}
-    </Button>
+    <>
+      {error && <Error>{error}</Error>}
+      {success && <Success>{success}</Success>}
+      <Button
+        loading={loading}
+        disabled={loading}
+        variant="contained"
+        size="sm"
+        onClick={handleClick}
+      >
+        Вернуть {role && getStatus(role).label}
+      </Button>
+    </>
   );
 };
 const getStatus = (role: string) => {
