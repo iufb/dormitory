@@ -5,6 +5,7 @@ import { StudentTable } from "@/widgets";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import styles from "./page.module.css";
+import { StudentTableTabs } from "@/widgets/StudentTable/StudentTable";
 const filterByDecan = (applications: Application[], role: string) => {
   return applications.filter((app) => {
     if (role == "decanlegal") {
@@ -16,14 +17,15 @@ const filterByDecan = (applications: Application[], role: string) => {
     return app.facultet === faculties[2];
   });
 };
-async function getApplications(): Promise<Application[] | null> {
-  const role = cookies().get("role")?.value.toLowerCase();
+async function getApplications(
+  role: string | undefined,
+): Promise<Application[] | null> {
   const token = cookies().get("token")?.value;
 
   if (role && token) {
     const res = await getApplicationsByRole(
       role.startsWith("decan") ? "decan" : role,
-      token
+      token,
     )
       .then((data) => {
         if (role.startsWith("decan")) {
@@ -49,7 +51,8 @@ export default async function AdminPanelPage({
   const token = cookies().get("token");
   if (!token) redirect(`/${params.locale}/admin/login`);
   const role = cookies().get("role")?.value;
-  const applications = await getApplications();
+  const applications = await getApplications(role?.toLowerCase());
+  const endApplications = await getApplications("end");
   console.log(applications);
 
   return (
@@ -60,7 +63,14 @@ export default async function AdminPanelPage({
         </Typography>
       </header>
       {applications && applications.length > 0 ? (
-        <StudentTable applications={applications} />
+        role == "specialist" ? (
+          <StudentTableTabs
+            normalApplications={applications}
+            endApplications={endApplications ?? []}
+          />
+        ) : (
+          <StudentTable applications={applications} />
+        )
       ) : (
         <Typography variant="subtitle">Нет заявок</Typography>
       )}

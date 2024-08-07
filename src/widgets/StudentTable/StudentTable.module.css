@@ -3,6 +3,25 @@
   width: 100%;
   display: inline;
 }
+.tabs {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+}
+.tab {
+  padding: 10px 12px;
+  border: none;
+  background: gray;
+  color: white;
+  border-radius: 10px;
+}
+.activeTab {
+  background: var(--color-primary);
+}
+.tab:hover {
+  opacity: 90%;
+}
 .overflow {
   max-height: 80%;
   overflow-y: scroll;

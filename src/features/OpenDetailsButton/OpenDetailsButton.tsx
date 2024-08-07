@@ -4,6 +4,7 @@ import {
   DecanForm,
   KomendantForm,
   MedicForm,
+  SpecialistForm,
 } from "@/features";
 import { Application } from "@/shared/api";
 import { useOnClickOutside } from "@/shared/hooks";
@@ -56,7 +57,7 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
             onClose={onClose}
           />
         )}
-        {role && role !== "specialist" && (
+        {role && (
           <div className={styles.right}>
             <Typography variant="adminTitle">Добавить</Typography>
             {getFormByRole(role, application, onClose)}
@@ -64,13 +65,13 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
         )}
       </div>
     </Modal>,
-    document.body
+    document.body,
   );
 };
 const getFormByRole = (
   role: string,
   application: Application,
-  close: () => void
+  close: () => void,
 ) => {
   if (role.startsWith("decan")) {
     return <DecanForm close={close} id={application.iin_id} />;
@@ -80,6 +81,9 @@ const getFormByRole = (
       return <KomendantForm close={close} id={application.iin_id} />;
     case "medic":
       return <MedicForm close={close} id={application.iin_id} />;
+    case "specialist":
+      return <SpecialistForm close={close} id={application.iin_id} />;
+
     default:
       return <></>;
   }
@@ -102,7 +106,12 @@ const ContentLeft = ({
       </Typography>
       <Typography variant="adminSubtitle">ИИН</Typography>
       <Typography variant="adminText">{application.iin_id}</Typography>
-
+      {role.includes("decan") && (
+        <>
+          <Typography variant="adminSubtitle">Курс</Typography>
+          <Typography variant="adminText">{application.course} курс</Typography>
+        </>
+      )}
       <Typography variant="adminSubtitle">Телефон</Typography>
       <Typography variant="adminText">{application.tel}</Typography>
       <Typography variant="adminSubtitle">Факультет</Typography>

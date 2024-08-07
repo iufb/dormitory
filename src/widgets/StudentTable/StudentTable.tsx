@@ -1,7 +1,9 @@
+"use client";
 import { OpenDetailsButton } from "@/features";
 import { Application } from "@/shared/api";
 import clsx from "clsx";
 import styles from "./StudentTable.module.css";
+import { useState } from "react";
 const columns = [
   { Header: "№", accessor: "id" },
   { Header: "ФИО", accessor: "name" },
@@ -16,12 +18,43 @@ const data = [
 interface StudentTableProps {
   applications: Application[];
 }
+interface StudentTabsProps {
+  normalApplications: Application[];
+  endApplications: Application[];
+}
+export const StudentTableTabs = ({
+  normalApplications,
+  endApplications,
+}: StudentTabsProps) => {
+  const [tab, setTab] = useState("normal");
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.tabs}>
+        <button
+          className={clsx(styles.tab, tab == "normal" && styles.activeTab)}
+          onClick={() => setTab("normal")}
+        >
+          Не заполненные
+        </button>
+        <button
+          className={clsx(styles.tab, tab == "end" && styles.activeTab)}
+          onClick={() => setTab("end")}
+        >
+          Заполненные
+        </button>
+      </div>
+      <StudentTable
+        applications={tab == "normal" ? normalApplications : endApplications}
+      />
+    </div>
+  );
+};
 export const StudentTable = ({ applications }: StudentTableProps) => {
   return (
     <div
       className={clsx(
         styles.wrapper,
-        applications.length >= 14 && styles.overflow
+        applications.length >= 14 && styles.overflow,
       )}
     >
       <table className={styles.table}>
@@ -46,7 +79,7 @@ export const StudentTable = ({ applications }: StudentTableProps) => {
                 <tr
                   key={rowIndex}
                   className={clsx(
-                    rowIndex % 2 == 0 ? styles.gray : styles.white
+                    rowIndex % 2 == 0 ? styles.gray : styles.white,
                   )}
                 >
                   {columns.map((column, idx) => {

@@ -17,7 +17,7 @@ import { useRequest } from "@/shared/hooks";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { PatternFormat } from "react-number-format";
-import { faculties } from "@/shared/contants";
+import { courses, faculties } from "@/shared/contants";
 import { useTranslations } from "next-intl";
 interface CreateApplicationForm {
   so_name: string;
@@ -28,6 +28,7 @@ interface CreateApplicationForm {
 export const CreateApplicationForm = () => {
   const [tel, setTel] = useState("");
   const [faculty, setFaculty] = useState("");
+  const [course, setCourse] = useState("");
   const t = useTranslations("forms.createApplication");
   const {
     register,
@@ -48,6 +49,8 @@ export const CreateApplicationForm = () => {
       ...data,
       id_card: data.id_card[0],
       facultet: faculty,
+      // get course number
+      course: course[0],
       tel,
       status: "decan",
     };
@@ -118,6 +121,12 @@ export const CreateApplicationForm = () => {
         onSelect={(item) => setFaculty(item)}
         items={faculties}
       />
+      <Select
+        selected={course}
+        label={"Курс"}
+        onSelect={(item) => setCourse(item)}
+        items={courses}
+      />
       <FileInput
         selected={watch("id_card") && watch("id_card")[0]?.name}
         {...register("id_card")}
@@ -133,7 +142,7 @@ export const CreateApplicationForm = () => {
         variant="contained"
         loading={loading}
         size="lg"
-        disabled={!tel || !faculty}
+        disabled={!tel || !faculty || !course}
       >
         {t("button")}
       </Button>

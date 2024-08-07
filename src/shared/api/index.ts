@@ -1,6 +1,6 @@
 import { getCookie } from "cookies-next";
 
-const backendUrl = "https://studdom.abu.edu.kz"
+const backendUrl = "https://studdom.abu.edu.kz";
 const roles = [
   "decanlegal",
   "decanlit",
@@ -14,6 +14,7 @@ const paths = {
   medic: "medic_view/",
   commandant: "commandant_view/",
   specialist: "specialist_view/",
+  end: "end_view/",
 };
 export interface Application {
   name: string;
@@ -21,6 +22,7 @@ export interface Application {
   id_card: string;
   iin_id: string;
   tel: string;
+  course: number;
   facultet: string;
   status: string;
   direction: string;
@@ -35,7 +37,7 @@ export const checkApplicationStatus = (id: number): Promise<Application> => {
 export const updateApplicationStatus = (
   id: string,
   status: string,
-  role: string
+  role: string,
 ) => {
   const data = new FormData();
   data.append("status", status);
@@ -48,7 +50,7 @@ export const updateApplicationStatus = (
 };
 export const getApplicationsByRole = (
   role: string,
-  token: string
+  token: string,
 ): Promise<Application[]> => {
   const path = paths[role as keyof typeof paths];
 
@@ -82,7 +84,7 @@ export const CreateApplication = (data: FormData) => {
 export const updateApplication = (
   by: keyof typeof paths,
   data: FormData,
-  id: string
+  id: string,
 ) => {
   return customFetch({
     method: "PATCH",
