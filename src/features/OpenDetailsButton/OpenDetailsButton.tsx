@@ -57,7 +57,7 @@ const DetailsModal = ({ application, onClose }: DetailsModalProps) => {
             onClose={onClose}
           />
         )}
-        {role && (
+        {role && application.status !== "end" && (
           <div className={styles.right}>
             <Typography variant="adminTitle">Добавить</Typography>
             {getFormByRole(role, application, onClose)}
