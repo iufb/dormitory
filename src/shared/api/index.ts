@@ -31,7 +31,7 @@ export interface Application {
   contract: string;
   statement_and_rules: string;
 }
-export const checkApplicationStatus = (id: number): Promise<Application> => {
+export const checkApplicationStatus = (id: string): Promise<Application> => {
   return customFetch({ method: "GET", path: `student/${id}/` });
 };
 export const updateApplicationStatus = (

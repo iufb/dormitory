@@ -15,7 +15,7 @@ export const CheckApplicationForm = () => {
     setLoading(true);
     setError("");
     setSuccess("");
-    checkApplicationStatus(+id)
+    checkApplicationStatus(id)
       .then((data) => {
         setLoading(false);
         setSuccess(t(`success.${data.status}`));
