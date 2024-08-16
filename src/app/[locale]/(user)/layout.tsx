@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
 import { headers } from "next/headers";
+import { Children, cloneElement, isValidElement } from "react";
 import { UAParser } from "ua-parser-js";
 
 export async function generateMetadata({
@@ -24,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const mobile = useIsMobileDevice();
-  console.log(mobile);
+
   return (
     <Layout
       navbar={<Navbar mobile={mobile} />}
@@ -38,7 +39,7 @@ export default function RootLayout({
 const useIsMobileDevice = () => {
   if (typeof process === "undefined") {
     throw new Error(
-      "[Server method] you are importing a server-only module outside of server"
+      "[Server method] you are importing a server-only module outside of server",
     );
   }
 
