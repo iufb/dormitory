@@ -1,9 +1,18 @@
-.home {
+.wrapper {
+  width: 100%;
   height: 100%;
+}
+.home {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+}
+.info {
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
 }
 .headText {
   line-height: 1.4em;
