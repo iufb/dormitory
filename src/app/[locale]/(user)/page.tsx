@@ -20,12 +20,7 @@ const useIsMobileDevice = () => {
 
   return device.type === "mobile";
 };
-export default function Home({
-  params,
-}: {
-  params: { locale: string };
-  mobile: boolean;
-}) {
+export default function Home({ params }: { params: { locale: string } }) {
   const t = useTranslations("mainPage");
 
   const mobile = useIsMobileDevice();
