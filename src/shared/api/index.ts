@@ -48,6 +48,14 @@ export const updateApplicationStatus = (
     body: { multipart: data },
   });
 };
+export const deleteApplication = (id: string, role: string) => {
+  return customFetch({
+    method: "DELETE",
+    path: `${paths[role as keyof typeof paths]}${id}/`,
+    token: `Token ${getCookie("token")}`,
+  });
+};
+
 export const getApplicationsByRole = (
   role: string,
   token: string,

@@ -1,5 +1,5 @@
 "use client";
-import { OpenDetailsButton } from "@/features";
+import { DeleteApplicationBtn, OpenDetailsButton } from "@/features";
 import { Application } from "@/shared/api";
 import clsx from "clsx";
 import styles from "./StudentTable.module.css";
@@ -8,6 +8,7 @@ const columns = [
   { Header: "№", accessor: "id" },
   { Header: "ФИО", accessor: "name" },
   { Header: "Телефон", accessor: "phone" },
+  { Header: "Удалить", accessor: "delete" },
   { Header: "Просмотр", accessor: "show" },
 ];
 const data = [
@@ -108,6 +109,8 @@ const FillTable = (idx: number, application: Application & { id: number }) => {
     case 2:
       return application.tel;
     case 3:
+      return <DeleteApplicationBtn id={application.iin_id} />;
+    case 4:
       return <OpenDetailsButton application={application} />;
   }
 };
