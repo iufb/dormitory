@@ -17,7 +17,7 @@ export const DeleteApplicationBtn = ({ id }: { id: string }) => {
     setError("");
     setSuccess("");
     if (role)
-      deleteApplication(id, role)
+      deleteApplication(id, role.includes("decan") ? "decan" : role)
         .then(() => {
           setSuccess("Удалено");
           refetch(() => setOpen(false));
