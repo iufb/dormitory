@@ -1,5 +1,9 @@
 "use client";
-import { DeleteApplicationBtn, OpenDetailsButton } from "@/features";
+import {
+  DeleteApplicationBtn,
+  OpenDetailsButton,
+  ShowStatistics,
+} from "@/features";
 import { Application } from "@/shared/api";
 import clsx from "clsx";
 import styles from "./StudentTable.module.css";
@@ -43,6 +47,10 @@ export const StudentTableTabs = ({
         >
           Заполненные
         </button>
+        <ShowStatistics
+          spec={normalApplications.length}
+          end={endApplications.length}
+        />
       </div>
       <StudentTable
         applications={tab == "normal" ? normalApplications : endApplications}
@@ -74,8 +82,6 @@ export const StudentTable = ({ applications }: StudentTableProps) => {
               return { ...row, id: idx + 1 };
             })
             .map((row, rowIndex) => {
-              console.log(row, "?RROW>");
-
               return (
                 <tr
                   key={rowIndex}
@@ -84,7 +90,6 @@ export const StudentTable = ({ applications }: StudentTableProps) => {
                   )}
                 >
                   {columns.map((column, idx) => {
-                    console.log(rowIndex);
                     return (
                       <td className={styles.cell} key={column.accessor}>
                         {FillTable(idx, row)}

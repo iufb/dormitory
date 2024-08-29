@@ -1,4 +1,5 @@
 export { CheckApplicationForm } from "./CheckApplicationForm/CheckApplicationForm";
+export { ShowStatistics } from "./ShowStatistics/ShowStatistics";
 export { DeleteApplicationBtn } from "./DeleteApplication/DeleteApplication";
 export { CreateApplicationForm } from "./CreateApplicationForm/CreateApplicationForm";
 export { OpenDetailsButton } from "./OpenDetailsButton/OpenDetailsButton";

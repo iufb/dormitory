@@ -13,6 +13,7 @@ interface ButtonProps extends ComponentProps<"button"> {
 export const Button = ({
   loading,
   variant,
+  className,
   size,
   children,
   ...props
@@ -23,6 +24,7 @@ export const Button = ({
         styles.button,
         { contained: styles.contained, outlined: styles.outlined }[variant],
         { lg: styles.lg, md: styles.md, sm: styles.sm }[size],
+        className,
       )}
       {...props}
     >

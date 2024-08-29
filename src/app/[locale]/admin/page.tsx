@@ -17,7 +17,7 @@ const filterByDecan = (applications: Application[], role: string) => {
     return app.facultet === faculties[2];
   });
 };
-async function getApplications(
+export async function getApplications(
   role: string | undefined,
 ): Promise<Application[] | null> {
   const token = cookies().get("token")?.value;
