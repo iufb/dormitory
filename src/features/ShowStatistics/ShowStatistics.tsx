@@ -5,6 +5,7 @@ import { IoClose } from "react-icons/io5";
 import styles from "./ShowStatistics.module.css";
 import { getApplicationsByRole } from "@/shared/api";
 import { getCookie } from "cookies-next";
+import { faculties } from "@/shared/contants";
 export const ShowStatistics = ({
   spec,
   end,
@@ -25,7 +26,12 @@ export const ShowStatistics = ({
         .then(([decanData, medicData, commandantData]) => {
           setStats({
             ...stats,
-            decan: decanData.length,
+            decanLegal: decanData.filter((app) => app.facultet === faculties[0])
+              .length,
+            decanIt: decanData.filter((app) => app.facultet === faculties[1])
+              .length,
+            decanHuman: decanData.filter((app) => app.facultet === faculties[2])
+              .length,
             medic: medicData.length,
             commandant: commandantData.length,
           });
@@ -35,6 +41,7 @@ export const ShowStatistics = ({
           console.error("Error fetching data:", error);
         });
   }, []);
+
   return (
     <>
       <Button
@@ -57,14 +64,28 @@ export const ShowStatistics = ({
           }
         >
           <ul className={styles.list}>
-            <li>Заселены -{end} человек </li>
+            <li>Заселены -{end} </li>
             <li>
               На рассмотрении у специалиста по работе с молодежью - {spec}{" "}
-              человек
             </li>
-            <li>У деканатов- {stats.decan} человек</li>
-            <li>У медика - {stats.medic} человек </li>
-            <li>У комменданта- {stats.commandant} человек </li>
+            <li>
+              <ul className={styles.decan}>
+                Деканаты :<li>Юридический факультет: {stats.decanLegal}</li>
+                <li>Факультет информационных технологий : {stats.decanIt}</li>
+                <li>Гуманитарный факультет : {stats.decanHuman}</li>
+              </ul>
+            </li>
+            <li>У медика - {stats.medic} </li>
+            <li>У комменданта- {stats.commandant} </li>
+            <li>
+              Всего заявок -{" "}
+              {Object.keys(stats).reduce(
+                (acc, value) => acc + stats[value],
+                0,
+              ) +
+                spec +
+                end}
+            </li>
           </ul>
         </Modal>
       )}
