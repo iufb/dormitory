@@ -1,6 +1,6 @@
 import { getCookie } from "cookies-next";
 
-const backendUrl = "https://studdom.abu.edu.kz";
+const backendUrl = "https://api.studdom.abu.edu.kz";
 const roles = [
   "decanlegal",
   "decanlit",
